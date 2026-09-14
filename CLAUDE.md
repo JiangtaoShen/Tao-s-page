@@ -49,7 +49,7 @@ drops the separator and silently corrupts the glyph.
 ## Visual direction
 
 Minimal academic: white ground, a single restrained blue accent, hairline rules,
-generous whitespace, a measure of 860px. No gradients, no drop shadows, no
+generous whitespace, a measure of 880px. No gradients, no drop shadows, no
 animation beyond a link underline.
 
 **Three sizes, and no others.** `--fs-lg` is the name, `--fs-base` is anything
@@ -68,9 +68,10 @@ no webfont, since a CJK face runs to megabytes and subsetting needs a build
 step, so it falls through to the platform UI face.
 
 The measure is tied to the typeface and the small size together. Source Serif
-at `--fs-sm` sets the longest affiliation line at 626px beside the 131px date
-column, so the measure cannot drop below 820px without wrapping it. Re-measure
-before changing any of the three.
+at 15px sets the longest affiliation line at 664px beside the 131px date
+column, so the measure cannot drop below 858px without wrapping it. The font is
+self-hosted, so those metrics hold on every machine. Re-measure before changing
+any of the three.
 
 ## Rendering model
 

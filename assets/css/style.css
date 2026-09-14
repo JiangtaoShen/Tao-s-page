@@ -74,17 +74,18 @@
      anything a reader actually reads, small is metadata and chrome: dates,
      labels, authors, venues, chips, captions, the footer. Adding a fourth is
      how a page starts to look busy. */
-  --fs-lg:   2rem;
-  --fs-base: 1rem;
-  --fs-sm:   0.875rem;
+  --fs-lg:   2rem;        /* 32px */
+  --fs-base: 1rem;        /* 16px */
+  --fs-sm:   0.9375rem;   /* 15px */
 
   /* Code blocks only, and those appear on project detail pages, never here. */
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
   /* Wide enough that the longest affiliation line in the experience list stays
-     on one row. At the small size that line needs 626px beside the 131px date
-     column, so anything under 820px wraps it. */
-  --measure: 860px;
+     on one row. At 15px that line needs 664px beside the 131px date column, so
+     anything under 858px wraps it. The font is self-hosted, so these metrics
+     are the same on every machine; the margin here only covers zoom rounding. */
+  --measure: 880px;
 }
 
 html[data-theme="dark"] {
