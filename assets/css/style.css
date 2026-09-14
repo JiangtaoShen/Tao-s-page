@@ -467,11 +467,16 @@ section + section { margin-top: 2.8rem; }
   padding-block: 1.5rem 2.5rem;
   color: var(--fg-faint);
   font-size: 0.84rem;
+}
+
+.site-footer .wrap {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
 }
+
+.theme-toggle svg { width: 15px; height: 15px; display: block; }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px;

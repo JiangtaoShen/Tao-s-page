@@ -71,6 +71,14 @@
 
   /* --- theme ------------------------------------------------------------ */
 
+  // Inline so the icons never depend on a font that lacks the glyph.
+  var SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"'
+          + ' stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">';
+  var ICON_MOON = SVG + '<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5z"/></svg>';
+  var ICON_SUN = SVG + '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2'
+               + 'M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6'
+               + 'M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>';
+
   function initTheme() {
     var stored = null;
     try { stored = localStorage.getItem("theme"); } catch (e) { /* private mode */ }
@@ -93,7 +101,7 @@
       var sysDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       var dark = (document.documentElement.getAttribute("data-theme")
                   || (sysDark ? "dark" : "light")) === "dark";
-      b.textContent = dark ? "☀" : "☽";
+      b.innerHTML = dark ? ICON_SUN : ICON_MOON;
       b.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
     }
   }
