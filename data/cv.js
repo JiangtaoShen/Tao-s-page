@@ -20,52 +20,7 @@
 window.CV = [
   {
     top: true,
-    heading: { en: "Education", zh: "教育经历" },
-    items: [
-      {
-        when: "2021.03 - 2025.03",
-        what: {
-          en: "Ph.D. (Doctor of Engineering)",
-          zh: "工学博士"
-        },
-        where: {
-          en: "School of Marine Science and Technology, Northwestern Polytechnical University, Xi'an, China",
-          zh: "西北工业大学 航海学院"
-        },
-        detail: {
-          en: "Advisor: TODO. Thesis: TODO.",
-          zh: "导师：TODO。学位论文：TODO。"
-        }
-      },
-      {
-        when: "2018.09 - 2021.02",
-        what: {
-          en: "M.Eng. (Master of Engineering)",
-          zh: "工学硕士"
-        },
-        where: {
-          en: "School of Marine Science and Technology, Northwestern Polytechnical University, Xi'an, China",
-          zh: "西北工业大学 航海学院"
-        },
-        detail: ""
-      },
-      {
-        when: "2014.09 - 2018.06",
-        what: {
-          en: "B.Eng. (Bachelor of Engineering)",
-          zh: "工学学士"
-        },
-        where: {
-          en: "Petroleum Engineering Institute, China University of Petroleum (East China), Qingdao, China",
-          zh: "中国石油大学（华东） 石油工程学院"
-        },
-        detail: ""
-      }
-    ]
-  },
-  {
-    top: true,
-    heading: { en: "Experience", zh: "工作经历" },
+    heading: { en: "Experience", zh: "经历" },
     items: [
       {
         when: { en: "2026.09 - present", zh: "2026.09 至今" },
@@ -77,7 +32,7 @@ window.CV = [
         }
       },
       {
-        when: { en: "2025.04 - 2026.09", zh: "2025.04 - 2026.09" },
+        when: "2025.04 - 2026.09",
         what: {
           en: "Research Fellow, Computer Science",
           zh: "博士后研究员（Research Fellow），计算机科学"
@@ -87,6 +42,36 @@ window.CV = [
           en: "Supervisor: Ke Li. TODO: one line on what you worked on.",
           zh: "合作导师：Ke Li。TODO: 一句话说明你当时的研究内容。"
         }
+      },
+      {
+        when: "2021.03 - 2025.03",
+        what: { en: "Ph.D. (Doctor of Engineering)", zh: "工学博士" },
+        where: {
+          en: "School of Marine Science and Technology, Northwestern Polytechnical University, Xi'an, China",
+          zh: "西北工业大学 航海学院"
+        },
+        detail: {
+          en: "Advisor: TODO. Thesis: TODO.",
+          zh: "导师：TODO。学位论文：TODO。"
+        }
+      },
+      {
+        when: "2018.09 - 2021.02",
+        what: { en: "M.Eng. (Master of Engineering)", zh: "工学硕士" },
+        where: {
+          en: "School of Marine Science and Technology, Northwestern Polytechnical University, Xi'an, China",
+          zh: "西北工业大学 航海学院"
+        },
+        detail: ""
+      },
+      {
+        when: "2014.09 - 2018.06",
+        what: { en: "B.Eng. (Bachelor of Engineering)", zh: "工学学士" },
+        where: {
+          en: "Petroleum Engineering Institute, China University of Petroleum (East China), Qingdao, China",
+          zh: "中国石油大学（华东） 石油工程学院"
+        },
+        detail: ""
       }
     ]
   },

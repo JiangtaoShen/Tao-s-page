@@ -9,8 +9,8 @@ works, including straight from the local filesystem.
 ## Structure
 
 ```
-index.html            The whole site: about, education, experience, interests,
-                      news, publications, projects, the rest of the CV, contact
+index.html            The whole site: about, experience, interests, news,
+                      publications, projects, the rest of the CV, contact
 projects/_template.html   Copy this to create a per-project detail page
 
 data/site.js          Profile, contact links, news          <- edit these
@@ -99,8 +99,8 @@ written as `2026.09 - present` or `2026.09 至今` and sorts above everything.
 Sections without dates, such as Skills, keep the order you write.
 
 A section marked `top: true` appears near the head of the page, above the
-research interests. Education and experience are marked that way; the rest sit
-below the projects.
+research interests. Experience is marked that way, and it holds posts and
+degrees in one list; the rest sit below the projects.
 
 **A PDF.** Put it in `assets/pdf/` and reference it as `assets/pdf/name.pdf`.
 

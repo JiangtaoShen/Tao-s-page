@@ -83,9 +83,10 @@ Pages in a subdirectory set `window.BASE = "../"` before the script tag. The
 `url()` helper prefixes local paths with it and leaves absolute URLs alone.
 
 The CV renders in two places. A section carrying `top: true` in `data/cv.js`
-goes to `#cv-top`, directly under the hero: today that is education and
-experience. The rest go to `#cv`, below the projects. With only one of the two
-mounts on a page, everything lands there.
+goes to `#cv-top`, directly under the hero: today that is the single
+Experience section, which holds the posts and the degrees together. The rest
+go to `#cv`, below the projects. With only one of the two mounts on a page,
+everything lands there.
 
 CV entries are ordered newest first by `sortItems`, which ranks the `when` text
 by the latest year it contains, treats present and 至今 as ongoing, and reads
