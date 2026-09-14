@@ -524,10 +524,16 @@ section + section { margin-top: 2.8rem; }
 }
 
 @media (max-width: 620px) {
-  .news time, .entry-when { width: 5.4rem; }
+  .news time { width: 5.4rem; }
   .pub-thumb { display: none; }
   .hero-photo { width: 110px; }
   .hero-name { font-size: 1.7rem; }
+  .nav { gap: 0.8rem; }
+
+  /* A date range and a job title will not both fit across a phone, so the
+     two columns become two stacked lines. */
+  .entry { flex-direction: column; gap: 0.1rem; padding: 0.85rem 0; }
+  .entry-when { width: auto; padding-top: 0; }
 }
 
 @media print {

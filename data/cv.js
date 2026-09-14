@@ -33,22 +33,28 @@ window.CV = [
     ]
   },
   {
-    heading: { en: "Experience", zh: "工作与实习" },
+    heading: { en: "Experience", zh: "工作经历" },
     items: [
       {
-        when: { en: "TODO - present", zh: "TODO 至今" },
+        when: { en: "2026.09 - present", zh: "2026.09 至今" },
         what: { en: "Postdoctoral Researcher", zh: "博士后研究员" },
         where: { en: "Earlham Institute, Norwich, UK", zh: "Earlham Institute，英国诺里奇" },
         detail: {
-          en: "TODO: One line on what you work on, and the group or supervisor.",
-          zh: "TODO: 一句话说明你的研究内容，以及所在课题组或合作导师。"
+          en: "Supervisor: Ke Li. TODO: one line on what you work on here.",
+          zh: "合作导师：Ke Li。TODO: 一句话说明你在这里的研究内容。"
         }
       },
       {
-        when: "TODO - TODO",
-        what: { en: "TODO: Earlier role", zh: "TODO: 此前的职位" },
-        where: { en: "TODO: Lab or Company", zh: "TODO: 某实验室或公司" },
-        detail: ""
+        when: { en: "2025.04 - 2026.09", zh: "2025.04 - 2026.09" },
+        what: {
+          en: "Research Fellow, Computer Science",
+          zh: "博士后研究员（Research Fellow），计算机科学"
+        },
+        where: { en: "University of Exeter, Exeter, UK", zh: "英国埃克塞特大学" },
+        detail: {
+          en: "Supervisor: Ke Li. TODO: one line on what you worked on.",
+          zh: "合作导师：Ke Li。TODO: 一句话说明你当时的研究内容。"
+        }
       }
     ]
   },
