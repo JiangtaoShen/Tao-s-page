@@ -8,14 +8,15 @@
        2. set `detail: true` on that entry so the card links here
        3. fill in the title, meta description and the body below
 
-     Every asset path on this page is relative to the site root, because
-     window.BASE is set to "../" for the shared script.
+     The prose here is hand written, so write both languages inline and mark
+     each block with data-lang="en" or data-lang="zh". The shared script shows
+     only the blocks matching the current language.
      =========================================================================== -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-suffix="Project">TODO: Project title</title>
+<title data-i18n-title="title.project">TODO: Project title</title>
 <meta name="description" content="TODO: one sentence about this project.">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../assets/css/style.css">
@@ -24,6 +25,8 @@
   try {
     var t = localStorage.getItem("theme");
     if (t) document.documentElement.setAttribute("data-theme", t);
+    var l = localStorage.getItem("lang");
+    if (l) document.documentElement.setAttribute("lang", l === "zh" ? "zh-CN" : "en");
   } catch (e) {}
 </script>
 </head>
@@ -33,10 +36,16 @@
 
 <main class="wrap">
 
-  <a class="backlink" href="../projects.html">&larr; All projects</a>
+  <a class="backlink" href="../projects.html" data-i18n="link.backProjects">&larr; All projects</a>
 
-  <h1 class="page-title">TODO: Project title</h1>
-  <p class="page-lede">TODO: one line summary, authors, venue.</p>
+  <h1 class="page-title">
+    <span data-lang="en">TODO: Project title</span>
+    <span data-lang="zh">TODO: 项目标题</span>
+  </h1>
+  <p class="page-lede">
+    <span data-lang="en">TODO: one line summary, authors, venue.</span>
+    <span data-lang="zh">TODO: 一句话概述、作者、发表处。</span>
+  </p>
 
   <div class="linkrow" style="margin-bottom:2rem;font-size:0.9rem">
     <a href="#" target="_blank" rel="noopener">Paper</a>
@@ -51,19 +60,34 @@
       <!-- Image, or a looping video:
            <video src="../assets/demo/xxx.mp4" autoplay muted loop playsinline></video> -->
       <img src="../assets/img/TODO.png" alt="TODO">
-      <figcaption>TODO: what the figure shows.</figcaption>
+      <figcaption>
+        <span data-lang="en">TODO: what the figure shows.</span>
+        <span data-lang="zh">TODO: 图示说明。</span>
+      </figcaption>
     </figure>
 
-    <h2>Overview</h2>
-    <p>TODO</p>
+    <div data-lang="en">
+      <h2>Overview</h2>
+      <p>TODO</p>
+      <h2>Method</h2>
+      <p>TODO</p>
+      <h2>Results</h2>
+      <p>TODO</p>
+    </div>
 
-    <h2>Method</h2>
-    <p>TODO</p>
+    <div data-lang="zh">
+      <h2>概述</h2>
+      <p>TODO</p>
+      <h2>方法</h2>
+      <p>TODO</p>
+      <h2>结果</h2>
+      <p>TODO</p>
+    </div>
 
-    <h2>Results</h2>
-    <p>TODO</p>
-
-    <h2>Citation</h2>
+    <h2>
+      <span data-lang="en">Citation</span>
+      <span data-lang="zh">引用</span>
+    </h2>
     <pre><code>@inproceedings{TODO,
   title     = {TODO},
   author    = {Shen, Jiangtao and TODO},
@@ -78,6 +102,7 @@
 <footer id="site-footer"></footer>
 
 <script src="../data/site.js"></script>
+<script src="../assets/js/i18n.js"></script>
 <script src="../assets/js/site.js"></script>
 </body>
 </html>

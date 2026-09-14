@@ -3,31 +3,37 @@
    Order does not matter, entries are grouped and sorted by year automatically.
 
    Fields
-     title     required
-     authors   required, array. Use "*" as a marker on your own name, e.g.
-               "Jiangtao Shen*" renders bold. Keep the asterisk out of the
-               string if you prefer, and set `me` below to match instead.
+     title     required. Paper titles usually stay in English for both
+               languages, so a plain string is normal here. Use
+               { en: "...", zh: "..." } if you do want a translated title.
+     authors   required, array of names. A name may itself be bilingual:
+               { en: "Jiangtao Shen", zh: "沈江涛" }.
      venue     journal or conference name, no year
-     year      number, required
+     year      number, required, used for grouping
      type      "journal" | "conference" | "preprint" | "thesis" | "patent"
-     note      short badge, e.g. "Oral", "Spotlight", "Best Paper", "Under review"
-     topic     optional array of tags, used by the topic filter
-     thumb     optional teaser image, assets/img/xxx.png, 4:3 works best
+               The filter chip label comes from assets/js/i18n.js.
+     note      short badge, e.g. { en: "Oral", zh: "口头报告" }
+     topic     optional array of tags, drives the topic filter
+     thumb     optional teaser image, 4:3 works best
      selected  true to also show it on the homepage
      links     any subset, empty values are skipped
    ========================================================================== */
 
-// Your own name as it appears in the `authors` arrays. Matching entries render bold.
-window.AUTHOR_SELF = "Jiangtao Shen";
+// Your own name, so it can be rendered bold in the author list.
+window.AUTHOR_SELF = { en: "Jiangtao Shen", zh: "沈江涛" };
 
 window.PUBLICATIONS = [
   {
     title: "TODO: Title of your most recent paper",
-    authors: ["Jiangtao Shen", "Coauthor A", "Coauthor B"],
+    authors: [
+      { en: "Jiangtao Shen", zh: "沈江涛" },
+      "Coauthor A",
+      "Coauthor B"
+    ],
     venue: "TODO: Conference or Journal Name",
     year: 2026,
     type: "conference",
-    note: "Oral",
+    note: { en: "Oral", zh: "口头报告" },
     topic: ["TODO-topic"],
     thumb: "",
     selected: true,
@@ -45,7 +51,10 @@ window.PUBLICATIONS = [
   },
   {
     title: "TODO: An earlier paper",
-    authors: ["Coauthor A", "Jiangtao Shen"],
+    authors: [
+      "Coauthor A",
+      { en: "Jiangtao Shen", zh: "沈江涛" }
+    ],
     venue: "TODO: Journal Name",
     year: 2025,
     type: "journal",

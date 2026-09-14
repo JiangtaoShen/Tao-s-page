@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-suffix="Publications">Publications</title>
+<title data-i18n-title="title.publications">Publications</title>
 <meta name="description" content="Publications by Jiangtao Shen.">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -11,6 +11,8 @@
   try {
     var t = localStorage.getItem("theme");
     if (t) document.documentElement.setAttribute("data-theme", t);
+    var l = localStorage.getItem("lang");
+    if (l) document.documentElement.setAttribute("lang", l === "zh" ? "zh-CN" : "en");
   } catch (e) {}
 </script>
 </head>
@@ -19,8 +21,8 @@
 <header id="site-header"></header>
 
 <main class="wrap">
-  <h1 class="page-title">Publications</h1>
-  <p class="page-lede">
+  <h1 class="page-title" data-i18n="page.pubTitle">Publications</h1>
+  <p class="page-lede" data-i18n="page.pubLede">
     Grouped by year. Use the filters to narrow by type or topic.
   </p>
 
@@ -32,6 +34,7 @@
 
 <script src="data/site.js"></script>
 <script src="data/publications.js"></script>
+<script src="assets/js/i18n.js"></script>
 <script src="assets/js/site.js"></script>
 </body>
 </html>

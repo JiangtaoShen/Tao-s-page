@@ -17,7 +17,8 @@
 
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
-  --font-serif: Georgia, "Iowan Old Style", "Times New Roman", "Songti SC", serif;
+  --font-serif: Georgia, "Iowan Old Style", "Times New Roman", "Songti SC",
+                "Noto Serif CJK SC", "Source Han Serif SC", SimSun, serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
   --measure: 760px;
@@ -52,6 +53,8 @@ html[data-theme="dark"] {
 /* --- base --------------------------------------------------------------- */
 
 *, *::before, *::after { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
 
 html { -webkit-text-size-adjust: 100%; }
 
@@ -148,6 +151,24 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 }
 .theme-toggle:hover { color: var(--fg); border-color: var(--fg-faint); }
 
+.theme-toggle svg { width: 15px; height: 15px; display: block; }
+
+.lang-toggle {
+  font: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  background: none;
+  border: 1px solid var(--rule);
+  color: var(--fg-muted);
+  border-radius: 6px;
+  height: 30px;
+  padding-inline: 0.55rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+.lang-toggle:hover { color: var(--fg); border-color: var(--fg-faint); }
+
 /* --- page rhythm -------------------------------------------------------- */
 
 main { padding-block: 2.6rem 3rem; }
@@ -172,6 +193,8 @@ section + section { margin-top: 2.8rem; }
 }
 
 .page-lede { color: var(--fg-muted); margin: 0 0 2rem; }
+
+.more { margin-top: 1rem; font-size: 0.9rem; }
 
 /* --- hero --------------------------------------------------------------- */
 
@@ -201,6 +224,14 @@ section + section { margin-top: 2.8rem; }
   letter-spacing: -0.02em;
 }
 
+.hero-alt {
+  font-size: 0.62em;
+  font-weight: 400;
+  color: var(--fg-muted);
+  letter-spacing: 0;
+  margin-left: 0.15em;
+}
+
 .hero-role { color: var(--fg-muted); margin: 0 0 0.9rem; font-size: 1rem; }
 .hero-role .affil { display: block; }
 
@@ -212,8 +243,12 @@ section + section { margin-top: 2.8rem; }
   margin-top: 0.9rem;
 }
 
+.bio { margin-top: 1.2rem; }
 .bio p { margin: 0 0 0.9rem; }
 .bio p:last-child { margin-bottom: 0; }
+
+.interests { margin: 0; padding-left: 1.15rem; }
+.interests li { margin-bottom: 0.15rem; }
 
 /* --- news --------------------------------------------------------------- */
 
@@ -380,6 +415,12 @@ section + section { margin-top: 2.8rem; }
 .card-title a { color: var(--fg); border: 0; }
 .card-title a:hover { color: var(--accent); }
 
+.card-period {
+  margin: 0 0 0.35rem;
+  font-size: 0.8rem;
+  color: var(--fg-faint);
+}
+
 .card-text {
   margin: 0 0 0.7rem;
   font-size: 0.9rem;
@@ -475,8 +516,6 @@ section + section { margin-top: 2.8rem; }
   gap: 1rem;
   flex-wrap: wrap;
 }
-
-.theme-toggle svg { width: 15px; height: 15px; display: block; }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px;

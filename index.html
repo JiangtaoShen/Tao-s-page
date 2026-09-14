@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-suffix="About">Jiangtao Shen</title>
+<title data-i18n-title="title.about">Jiangtao Shen</title>
 <meta name="description" content="Academic homepage of Jiangtao Shen.">
 <meta name="author" content="Jiangtao Shen">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
@@ -13,6 +13,8 @@
   try {
     var t = localStorage.getItem("theme");
     if (t) document.documentElement.setAttribute("data-theme", t);
+    var l = localStorage.getItem("lang");
+    if (l) document.documentElement.setAttribute("lang", l === "zh" ? "zh-CN" : "en");
   } catch (e) {}
 </script>
 </head>
@@ -25,29 +27,25 @@
   <section id="hero"></section>
 
   <section>
-    <h2 class="section-title">Research Interests</h2>
+    <h2 class="section-title" data-i18n="section.interests">Research Interests</h2>
     <div id="interests"></div>
   </section>
 
   <section>
-    <h2 class="section-title">News</h2>
+    <h2 class="section-title" data-i18n="section.news">News</h2>
     <ul id="news"></ul>
   </section>
 
   <section>
-    <h2 class="section-title">Selected Publications</h2>
+    <h2 class="section-title" data-i18n="section.selectedPubs">Selected Publications</h2>
     <div id="pub-list" data-selected="true"></div>
-    <p style="margin-top:1rem;font-size:0.9rem">
-      <a href="publications.html">All publications &rarr;</a>
-    </p>
+    <p class="more"><a href="publications.html" data-i18n="link.allPubs">All publications &rarr;</a></p>
   </section>
 
   <section>
-    <h2 class="section-title">Featured Projects</h2>
+    <h2 class="section-title" data-i18n="section.featured">Featured Projects</h2>
     <div id="project-list" data-featured="true"></div>
-    <p style="margin-top:1rem;font-size:0.9rem">
-      <a href="projects.html">All projects &rarr;</a>
-    </p>
+    <p class="more"><a href="projects.html" data-i18n="link.allProjects">All projects &rarr;</a></p>
   </section>
 
 </main>
@@ -57,6 +55,7 @@
 <script src="data/site.js"></script>
 <script src="data/publications.js"></script>
 <script src="data/projects.js"></script>
+<script src="assets/js/i18n.js"></script>
 <script src="assets/js/site.js"></script>
 </body>
 </html>

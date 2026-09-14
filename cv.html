@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-suffix="CV">Curriculum Vitae</title>
+<title data-i18n-title="title.cv">Curriculum Vitae</title>
 <meta name="description" content="Curriculum vitae of Jiangtao Shen.">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -11,6 +11,8 @@
   try {
     var t = localStorage.getItem("theme");
     if (t) document.documentElement.setAttribute("data-theme", t);
+    var l = localStorage.getItem("lang");
+    if (l) document.documentElement.setAttribute("lang", l === "zh" ? "zh-CN" : "en");
   } catch (e) {}
 </script>
 </head>
@@ -19,8 +21,8 @@
 <header id="site-header"></header>
 
 <main class="wrap">
-  <h1 class="page-title">Curriculum Vitae</h1>
-  <p class="page-lede">
+  <h1 class="page-title" data-i18n="page.cvTitle">Curriculum Vitae</h1>
+  <p class="page-lede" data-i18n-html="page.cvLede">
     A PDF version is available <a href="assets/pdf/cv.pdf">here</a>.
   </p>
 
@@ -31,6 +33,7 @@
 
 <script src="data/site.js"></script>
 <script src="data/cv.js"></script>
+<script src="assets/js/i18n.js"></script>
 <script src="assets/js/site.js"></script>
 </body>
 </html>

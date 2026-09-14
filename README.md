@@ -2,8 +2,9 @@
 
 Source for <https://github.com/JiangtaoShen/Tao-s-page>.
 
-A dependency-free static site. No build step, no package manager, no framework.
-Open `index.html` in a browser and it works, including from the local filesystem.
+A dependency-free bilingual static site, English and Chinese. No build step, no
+package manager, no framework. Open `index.html` in a browser and it works,
+including straight from the local filesystem.
 
 ## Structure
 
@@ -19,8 +20,9 @@ data/publications.js  Publication list
 data/projects.js      Project list
 data/cv.js            CV sections
 
-assets/css/style.css  All styling, design tokens at the top
+assets/js/i18n.js     Interface strings for both languages
 assets/js/site.js     All rendering, shared by every page
+assets/css/style.css  All styling, design tokens at the top
 assets/img/           Photos, teaser images, favicon
 assets/pdf/           Paper PDFs, cv.pdf
 assets/demo/          Demo videos and GIFs
@@ -29,16 +31,45 @@ assets/demo/          Demo videos and GIFs
 Content lives entirely in `data/*.js`. Adding a paper or a project means adding
 one object to an array; no HTML is touched.
 
+## Writing bilingual content
+
+Any text field in a data file takes either form:
+
+```js
+title: "Same text in both languages"
+title: { en: "English text", zh: "中文文本" }
+```
+
+Arrays work the same way, so a bio can have a different number of paragraphs in
+each language:
+
+```js
+bio: { en: ["...", "..."], zh: ["..."] }
+```
+
+If one language is missing, the other is shown rather than an empty space. That
+keeps the site usable while it is half translated.
+
+Interface wording — navigation, section headings, button labels — is not content
+and lives in `assets/js/i18n.js`. Add a key under both `en` and `zh`, then
+reference it from HTML with `data-i18n="key"`.
+
+The language toggle sits in the header, remembers the choice in `localStorage`,
+and switches the page in place without reloading. First-time visitors get
+Chinese if their browser prefers it, English otherwise.
+
 ## Adding content
 
 **A publication.** Append an entry to `window.PUBLICATIONS` in
 `data/publications.js`. Set `selected: true` to also surface it on the homepage.
 Any key in `links` that has a value renders as a link; empty ones are skipped.
+Paper titles and venue names normally stay in English in both languages.
 
 **A project.** Append an entry to `window.PROJECTS` in `data/projects.js`. For a
 project that needs its own page, copy `projects/_template.html` to
 `projects/<id>.html` where `<id>` matches the entry's `id`, then set
-`detail: true`.
+`detail: true`. On that page the prose is hand written, so each block is marked
+`data-lang="en"` or `data-lang="zh"` and only the matching one is shown.
 
 **A demo.** Put an `.mp4` or `.webm` in `assets/demo/` and point the project's
 `media` field at it. Video files autoplay muted and loop on the card. Keep them
@@ -73,3 +104,5 @@ bare `https://jiangtaoshen.github.io/`, rename the repository to
   which persists in `localStorage`.
 - Pages in a subdirectory must set `window.BASE = "../"` before loading
   `assets/js/site.js`, so generated links resolve.
+- Data files are UTF-8 and contain Chinese characters directly, not escape
+  sequences. Keep them that way so they stay editable.
