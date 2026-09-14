@@ -107,6 +107,20 @@ mount just the header and footer:
 | `cv-top`       | CV sections flagged `top: true`, rendered near the head of the page |
 | `cv`           | the remaining CV sections, each with its own heading |
 | `site-footer`  | copyright and last-updated line                    |
+| `toc`          | the contents drawer, built from the rendered headings |
+
+The contents drawer is generated from the `.section-title` headings the page
+actually rendered, so it cannot drift from the sections and it follows the
+language for free. Each section carries an anchor id: the static ones are
+written in `index.html` with a `sec-` prefix, the CV ones are emitted as
+`cv-<icon>`. **The prefix is not decoration.** Several sections wrap a mount
+point of the same name, so a section with `id="contact"` around `<div
+id="contact">` is a duplicate id, and the renderer then overwrites the heading.
+
+The drawer drives its own scrolling rather than leaving it to the browser,
+because a link whose hash already matches the address bar scrolls nowhere.
+Closing it after a link click deliberately does not return focus to the
+button, and every `focus()` passes `preventScroll`, or focus fights the scroll.
 
 Static markup is translated through `data-i18n` (textContent), `data-i18n-html`
 (innerHTML, for strings containing links) and `data-i18n-title` (document

@@ -244,6 +244,9 @@
                + 'M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6'
                + 'M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>';
 
+  var ICON_TOC = SVG + '<path d="M4 6.5h16M4 12h16M4 17.5h10"/></svg>';
+  var ICON_CLOSE = SVG + '<path d="m6 6 12 12M18 6 6 18"/></svg>';
+
   function isDark() {
     var set = document.documentElement.getAttribute("data-theme");
     if (set) return set === "dark";
@@ -284,6 +287,8 @@
       + '<a class="brand" href="' + esc(BASE + "index.html") + '">'
       + esc(t(SITE.brand) || t(SITE.profile && SITE.profile.name) || "Home") + "</a>"
       + '<div class="controls">'
+      + '<button class="toc-toggle" type="button" aria-expanded="' + tocOpen
+      + '" aria-controls="toc" aria-label="' + esc(tr("toc.title")) + '">' + ICON_TOC + "</button>"
       + '<button class="lang-toggle" type="button" aria-label="' + esc(tr("lang.switchToLabel"))
       + '">' + esc(tr("lang.switchTo")) + "</button>"
       + '<button class="theme-toggle" type="button"></button>'
@@ -298,6 +303,10 @@
 
     el.querySelector(".lang-toggle").addEventListener("click", function () {
       setLang(lang === "en" ? "zh" : "en");
+    });
+
+    el.querySelector(".toc-toggle").addEventListener("click", function () {
+      setToc(!tocOpen);
     });
   }
 
@@ -652,7 +661,10 @@
         + (links ? '<div class="linkrow">' + links + "</div>" : "")
         + "</div></div>";
     }).join("");
-    return '<section><h2 class="section-title">' + sectionIcon(sec.icon)
+    var id = sec.icon ? "cv-" + sec.icon : "";
+    return '<section' + (id ? ' id="' + esc(id) + '"' : "")
+      + '><h2 class="section-title" data-icon="' + esc(sec.icon || "") + '">'
+      + sectionIcon(sec.icon)
       + "<span>" + esc(t(sec.heading)) + "</span></h2>"
       + items + "</section>";
   }
@@ -672,6 +684,88 @@
 
     top.innerHTML = html(CV.filter(function (sec) { return sec.top; }));
     rest.innerHTML = html(CV.filter(function (sec) { return !sec.top; }));
+  }
+
+  /* --- contents drawer --------------------------------------------------- */
+
+  // The drawer is built from the headings the page actually rendered, so it
+  // cannot fall out of step with the sections, and it follows the language
+  // without a second list to translate.
+
+  var tocOpen = false;
+
+  // restoreFocus is false when the drawer closes because the reader chose a
+  // section: focus belongs at the destination then, not back on the button.
+  // preventScroll matters too, or moving focus fights the scroll that follows.
+  function setToc(open, restoreFocus) {
+    tocOpen = !!open;
+    document.documentElement.classList.toggle("toc-open", tocOpen);
+    var btn = document.querySelector(".toc-toggle");
+    if (btn) btn.setAttribute("aria-expanded", String(tocOpen));
+    var panel = mount("toc");
+    if (tocOpen) {
+      var first = panel && panel.querySelector("a");
+      if (first) first.focus({ preventScroll: true });
+    } else if (btn && restoreFocus !== false) {
+      btn.focus({ preventScroll: true });
+    }
+  }
+
+  function renderToc() {
+    var panel = mount("toc");
+    if (!panel) return;
+
+    var entries = [];
+    document.querySelectorAll("main .section-title").forEach(function (h, i) {
+      var sec = h.closest("section");
+      if (!sec) return;
+      if (!sec.id) sec.id = "section-" + i;
+      entries.push({
+        id: sec.id,
+        icon: h.getAttribute("data-icon") || "",
+        label: (h.textContent || "").trim()
+      });
+    });
+
+    panel.innerHTML =
+      '<div class="toc-head">'
+      + '<p class="toc-title">' + esc(tr("toc.title")) + "</p>"
+      + '<button class="toc-close" type="button" aria-label="' + esc(tr("toc.close")) + '">'
+      + ICON_CLOSE + "</button>"
+      + "</div>"
+      + '<nav><ul class="toc-list">'
+      + entries.map(function (e) {
+          return '<li><a href="#' + esc(e.id) + '">' + sectionIcon(e.icon)
+            + "<span>" + esc(e.label) + "</span></a></li>";
+        }).join("")
+      + "</ul></nav>";
+
+    panel.querySelector(".toc-close").addEventListener("click", function () {
+      setToc(false);
+    });
+
+    // Scrolling is driven here rather than left to the browser. A link whose
+    // hash already matches the address bar is a no-op otherwise, so the second
+    // click on the same section would do nothing.
+    panel.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        var href = a.getAttribute("href");
+        var target = href && document.querySelector(href);
+        setToc(false, false);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ block: "start" });
+        if (history.replaceState) history.replaceState(null, "", href);
+      });
+    });
+
+    var backdrop = mount("toc-backdrop");
+    if (backdrop && !backdrop.dataset.wired) {
+      backdrop.dataset.wired = "1";
+      backdrop.addEventListener("click", function () { setToc(false); });
+    }
+
+    document.documentElement.classList.toggle("toc-open", tocOpen);
   }
 
   /* --- static markup ---------------------------------------------------- */
@@ -713,9 +807,13 @@
     renderProjects();
     renderCV();
     renderFooter();
+    renderToc();
   }
 
   function boot() {
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && tocOpen) setToc(false);
+    });
     applyStoredTheme();
     lang = storedLang();
     document.documentElement.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");

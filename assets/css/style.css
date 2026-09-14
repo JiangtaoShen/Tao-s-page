@@ -633,3 +633,107 @@ a:hover > .ico { opacity: 1; }
   body { font-size: 11pt; }
   a { color: inherit; }
 }
+
+/* --- contents drawer ----------------------------------------------------- */
+
+/* Hidden until asked for. Built from the headings the page rendered, so it
+   never disagrees with the sections it points at. */
+
+.toc-toggle {
+  background: none;
+  border: 1px solid var(--rule);
+  color: var(--fg-muted);
+  border-radius: 6px;
+  width: 30px; height: 30px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.toc-toggle:hover { color: var(--fg); border-color: var(--fg-faint); }
+.toc-toggle svg { width: 15px; height: 15px; display: block; }
+
+.toc {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: min(280px, 82vw);
+  background: var(--bg);
+  border-inline-end: 1px solid var(--rule);
+  padding: 1.1rem 0.9rem 2rem;
+  z-index: 40;
+  overflow-y: auto;
+  /* visibility, not display, so the panel can animate and still leave the tab
+     order while it is closed. */
+  visibility: hidden;
+  transform: translateX(-100%);
+  transition: transform .22s ease, visibility .22s;
+}
+
+html.toc-open .toc { visibility: visible; transform: none; }
+
+.toc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 0.8rem;
+  padding: 0 0.35rem 0.6rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.toc-title {
+  margin: 0;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--fg-muted);
+}
+
+.toc-close {
+  background: none;
+  border: 0;
+  color: var(--fg-faint);
+  cursor: pointer;
+  padding: 2px;
+  display: inline-flex;
+}
+.toc-close:hover { color: var(--fg); }
+.toc-close svg { width: 15px; height: 15px; display: block; }
+
+.toc-list { list-style: none; margin: 0; padding: 0; }
+
+.toc-list a {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.45rem;
+  border-radius: 6px;
+  border: 0;
+  color: var(--fg);
+  font-size: var(--fs-sm);
+}
+.toc-list a:hover { background: var(--bg-subtle); color: var(--accent); }
+.toc-list .ico { width: 14px; height: 14px; }
+
+.toc-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .22s ease, visibility .22s;
+}
+
+html.toc-open .toc-backdrop { opacity: 1; visibility: visible; }
+
+/* Clears the sticky header when a link jumps to a section. */
+main section { scroll-margin-top: 78px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toc, .toc-backdrop { transition: none; }
+}

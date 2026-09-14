@@ -31,7 +31,9 @@ Content lives entirely in `data/*.js`. Adding a paper or a project means adding
 one object to an array; no HTML is touched.
 
 There is no navigation bar, because there is only one page. The header carries
-the name and the language and theme toggles.
+the name, a contents button, and the language and theme toggles. The contents
+button opens a drawer listing every section; it is generated from the headings
+on the page, so adding or removing a section updates it with no extra step.
 
 ## Writing bilingual content
 

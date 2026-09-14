@@ -14,6 +14,8 @@ window.I18N = {
   en: {
     "lang.switchTo":        "中文",
     "lang.switchToLabel":   "Switch to Chinese",
+    "toc.title":            "Contents",
+    "toc.close":            "Close contents",
     "theme.toDark":         "Switch to dark theme",
     "theme.toLight":        "Switch to light theme",
 
@@ -46,6 +48,8 @@ window.I18N = {
   zh: {
     "lang.switchTo":        "EN",
     "lang.switchToLabel":   "切换到英文",
+    "toc.title":            "目录",
+    "toc.close":            "关闭目录",
     "theme.toDark":         "切换到深色主题",
     "theme.toLight":        "切换到浅色主题",
 
