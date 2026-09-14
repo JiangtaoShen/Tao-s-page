@@ -77,6 +77,11 @@ under a few megabytes; GitHub Pages has no streaming.
 
 **A PDF.** Put it in `assets/pdf/` and reference it as `assets/pdf/name.pdf`.
 
+**Contact details.** `profile.email` and `profile.address` in `data/site.js` feed
+the Contact section at the foot of the homepage. The address is one array entry
+per line and stays in English in both languages, because a postal service has to
+read it.
+
 ## Local preview
 
 Double-clicking `index.html` works, because the data files are plain scripts

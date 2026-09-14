@@ -462,6 +462,13 @@ section + section { margin-top: 2.8rem; }
 .entry-what .where { color: var(--fg-muted); font-size: 0.93rem; }
 .entry-what .detail { color: var(--fg-muted); font-size: 0.9rem; margin: 0.2rem 0 0; }
 
+.postal {
+  font-style: normal;
+  color: var(--fg-muted);
+  font-size: 0.93rem;
+  line-height: 1.55;
+}
+
 /* --- project detail page ------------------------------------------------ */
 
 .prose h2 { font-size: 1.15rem; margin: 2rem 0 0.6rem; }

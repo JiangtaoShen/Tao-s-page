@@ -23,6 +23,10 @@ to `https://github.com/JiangtaoShen/Tao-s-page` and is served by GitHub Pages.
   is supplied for a bio, award or project description, leave the other absent;
   the renderer falls back to the language that exists.
 
+Publication topic tags are the one exception to the bilingual rule. A tag is
+both the chip label and the filter key, so a translated tag would break the
+filter when the reader switches language. Keep `topic` values in one language.
+
 ## Visual direction
 
 Minimal academic: white ground, a single restrained blue accent, hairline rules,
@@ -40,6 +44,7 @@ element with a known id, and the script skips anything absent:
 | `hero`         | photo, name, role, contact links, bio              |
 | `interests`    | research interest bullets                          |
 | `news`         | news list, capped by `SITE.newsLimit`              |
+| `contact`      | email and postal address, as CV-style rows          |
 | `pub-toolbar`  | type and topic filter chips plus search box        |
 | `pub-list`     | publications; `data-selected="true"` limits to the homepage subset |
 | `project-list` | project cards; `data-featured="true"` for homepage |

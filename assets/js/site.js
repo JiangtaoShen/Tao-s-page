@@ -268,6 +268,30 @@
       : "";
   }
 
+  // Reuses the CV two-column rows, so contact details line up the same way.
+  function renderContact() {
+    var el = mount("contact");
+    if (!el) return;
+    var p = SITE.profile || {};
+    var rows = "";
+
+    if (has(t(p.email))) {
+      var mail = t(p.email);
+      rows += '<div class="entry"><div class="entry-when">' + esc(tr("contact.email"))
+        + '</div><div class="entry-what"><a href="mailto:' + esc(mail) + '">'
+        + esc(mail) + "</a></div></div>";
+    }
+
+    var lines = list(p.address);
+    if (lines.length) {
+      rows += '<div class="entry"><div class="entry-when">' + esc(tr("contact.address"))
+        + '</div><div class="entry-what"><address class="postal">'
+        + lines.map(esc).join("<br>") + "</address></div></div>";
+    }
+
+    el.innerHTML = rows;
+  }
+
   function renderNews() {
     var el = mount("news");
     if (!el) return;
@@ -528,6 +552,7 @@
     renderHero();
     renderInterests();
     renderNews();
+    renderContact();
     renderPublications();
     renderProjects();
     renderCV();

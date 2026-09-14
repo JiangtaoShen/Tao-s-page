@@ -26,6 +26,9 @@ window.I18N = {
     "section.news":         "News",
     "section.selectedPubs": "Selected Publications",
     "section.featured":     "Featured Projects",
+    "section.contact":      "Contact",
+    "contact.email":        "Email",
+    "contact.address":      "Address",
 
     "link.allPubs":         "All publications →",
     "link.allProjects":     "All projects →",
@@ -77,6 +80,9 @@ window.I18N = {
     "section.news":         "最新动态",
     "section.selectedPubs": "代表性论文",
     "section.featured":     "代表性项目",
+    "section.contact":      "联系方式",
+    "contact.email":        "邮箱",
+    "contact.address":      "通讯地址",
 
     "link.allPubs":         "全部论文 →",
     "link.allProjects":     "全部项目 →",
