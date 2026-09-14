@@ -97,8 +97,8 @@ everything lands there.
 CV entries are ordered newest first by `sortItems`, which ranks the `when` text
 by the latest year it contains, treats present and 至今 as ongoing, and reads
 both languages so the order never changes with the language. A section is only
-sorted when every entry yields a date, which leaves Skills and Academic Service
-in the order the data file declares. So do not hand-order dated sections.
+sorted when every entry yields a date, which leaves Academic Service in the
+order the data file declares. So do not hand-order dated sections.
 
 Both CV blocks are bare divs wrapping several sections, so vertical rhythm keys
 off `main > * + *` as well as `section + section`. Dropping either rule leaves

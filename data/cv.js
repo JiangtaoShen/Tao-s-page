@@ -178,26 +178,5 @@ window.CV = [
         detail: ""
       }
     ]
-  },
-  {
-    icon: "skills",
-    heading: { en: "Skills", zh: "技能" },
-    items: [
-      {
-        when: { en: "Programming", zh: "编程" },
-        what: "TODO: Python, MATLAB, C++",
-        where: "",
-        detail: ""
-      },
-      {
-        when: { en: "Languages", zh: "语言" },
-        what: {
-          en: "TODO: Chinese (native), English (fluent)",
-          zh: "TODO: 中文（母语）、英语（流利）"
-        },
-        where: "",
-        detail: ""
-      }
-    ]
   }
 ];

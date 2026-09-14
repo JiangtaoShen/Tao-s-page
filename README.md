@@ -102,7 +102,8 @@ under a few megabytes; GitHub Pages has no streaming.
 list. Sections whose entries all carry a date are sorted newest first for you,
 so position in the file does not matter; an entry running to the present is
 written as `2026.09 - present` or `2026.09 至今` and sorts above everything.
-Sections without dates, such as Skills, keep the order you write.
+A section whose entries carry no date, such as Academic Service, keeps the
+order you write.
 
 A section marked `top: true` appears near the head of the page, above the
 research interests. Experience is marked that way, and it holds posts and
