@@ -34,7 +34,9 @@ Author position is derived, not stored twice. First authorship is read off the
 first entry of `authors` by `isLeadAuthor`, which compares against
 `AUTHOR_SELF` in either language, so it cannot drift from the author list.
 Being a corresponding author cannot be read off anything, so it is stated as
-`corresponding: true` on the publication. Lead means either one. The topics are fixed to the three research directions and are
+`corresponding: true` on the publication. Lead means either one.
+
+The topics are fixed to the three research directions and are
 declared once in `window.TOPICS` in `data/publications.js`, each with a stable
 `id` and a bilingual `label`. A publication stores ids, never labels, so the
 chip text can change with the language while the filter keeps working. A chip

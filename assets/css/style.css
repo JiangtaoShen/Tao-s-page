@@ -371,8 +371,9 @@ a:hover > .ico { opacity: 1; }
   color: var(--fg-muted);
   background: none;
   border: 1px solid var(--rule);
-  border-radius: 999px;
-  padding: 0.18rem 0.75rem;
+  /* Same radius as the header toggles, so every control on the page agrees. */
+  border-radius: 6px;
+  padding: 0.18rem 0.7rem;
   cursor: pointer;
 }
 .chip:hover { color: var(--fg); }
