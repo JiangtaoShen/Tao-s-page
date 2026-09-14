@@ -244,7 +244,7 @@
                + 'M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6'
                + 'M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>';
 
-  var ICON_TOC = SVG + '<path d="M4 6.5h16M4 12h16M4 17.5h10"/></svg>';
+  var ICON_EXPAND = SVG + '<path d="M5 5.5v13"/><path d="m12 6.5 5.5 5.5-5.5 5.5"/></svg>';
   var ICON_COLLAPSE = SVG + '<path d="M5 5.5v13"/><path d="m17.5 6.5-5.5 5.5 5.5 5.5"/></svg>';
 
   function isDark() {
@@ -757,7 +757,7 @@
     // The bookmark: the only way in, and the thing the drawer retracts into.
     var tab = mount("toc-tab");
     if (tab) {
-      tab.innerHTML = ICON_TOC;
+      tab.innerHTML = ICON_EXPAND;
       tab.setAttribute("aria-label", tr("toc.title"));
       tab.setAttribute("title", tr("toc.title"));
       tab.setAttribute("aria-controls", "toc");
