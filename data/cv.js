@@ -82,7 +82,7 @@ window.CV = [
   },
   {
     icon: "awards",
-    heading: { en: "Awards and Honours", zh: "奖励与荣誉" },
+    heading: { en: "Awards and honours", zh: "奖励与荣誉" },
     items: [
       {
         when: "2025 - 2027",
@@ -106,7 +106,7 @@ window.CV = [
   },
   {
     icon: "service",
-    heading: { en: "Academic Service", zh: "学术服务" },
+    heading: { en: "Academic service", zh: "学术服务" },
     items: [
       {
         when: { en: "Journal reviewer", zh: "期刊审稿人" },

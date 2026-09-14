@@ -43,6 +43,10 @@ chip text can change with the language while the filter keeps working. A chip
 is rendered for every declared topic even when nothing is tagged with it, so
 the three directions always read as a complete set.
 
+Section headings are sentence case, not small caps and not title case: only
+the first letter is capital, so "Awards and honours", never "Awards and
+Honours". Job titles and degrees inside an entry keep their own capitals.
+
 Every section heading carries a small icon. Static headings in `index.html`
 name theirs with `data-icon` beside `data-i18n`; CV sections name theirs with
 `icon` in `data/cv.js`. Both resolve against the `SECTION_ICONS` map in

@@ -17,7 +17,7 @@ window.I18N = {
     "theme.toDark":         "Switch to dark theme",
     "theme.toLight":        "Switch to light theme",
 
-    "section.interests":    "Research Interests",
+    "section.interests":    "Research interests",
     "section.news":         "News",
     "section.publications": "Publications",
     "section.projects":     "Projects",
