@@ -445,11 +445,19 @@
     return first != null && isSelf(first);
   }
 
+  // Your own name is rendered from AUTHOR_SELF rather than from the entry, so
+  // it follows the language even though the data lists it in one spelling.
+  // Every other author is shown exactly as written. The separator is the same
+  // in both languages: an author list reads as a citation, not as running
+  // Chinese prose, so the enumeration comma is out of place in it.
   function authorsHtml(authors) {
     return list(authors).map(function (a) {
-      var shown = String(t(a)).replace(/\*+$/, "").trim();
-      return isSelf(a) ? '<span class="me">' + esc(shown) + "</span>" : esc(shown);
-    }).join(lang === "zh" ? "、" : ", ");
+      var mine = isSelf(a);
+      var shown = mine
+        ? String(t(SELF)).trim()
+        : String(t(a)).replace(/\*+$/, "").trim();
+      return mine ? '<span class="me">' + esc(shown) + "</span>" : esc(shown);
+    }).join(", ");
   }
 
   function pubHtml(p) {

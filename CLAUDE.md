@@ -50,6 +50,12 @@ line the projects section would. The contents drawer still skips any section
 marked hidden, so nothing that starts hiding itself later leaves a link
 pointing at an invisible heading.
 
+Author lists use one separator in both languages, a comma and a space: the
+list reads as a citation, not as running Chinese prose. Only Jiangtao's own
+name switches language, and it does so from `AUTHOR_SELF` rather than from the
+entry, so the data can list every author in one spelling. Coauthor names are
+shown exactly as written.
+
 Author position is derived, not stored twice. First authorship is read off the
 first entry of `authors` by `isLeadAuthor`, which compares against
 `AUTHOR_SELF` in either language, so it cannot drift from the author list.
