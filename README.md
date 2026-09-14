@@ -83,6 +83,12 @@ linkedin, cv, link. Omit it and the destination decides, so a mailto link gets
 the envelope and a .pdf gets the document icon without any extra work. To add a
 new icon, put its path in the `ICONS` map; do not pull in an icon font or a CDN.
 
+**A section icon.** Every heading shows one. A heading written in
+`index.html` names it with `data-icon`, a CV section with `icon` in
+`data/cv.js`; both look the name up in `SECTION_ICONS` in `assets/js/site.js`,
+which holds experience, interests, news, publications, projects, awards, talks,
+teaching, service, skills and contact. Add a new one there, as inline SVG.
+
 **Contact details.** `profile.email` and `profile.address` in `data/site.js` feed
 the Contact section at the foot of the page. The address is one array entry per
 line and stays in English in both languages, because a postal service has to

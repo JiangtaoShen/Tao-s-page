@@ -7,6 +7,10 @@
    Entries are sorted newest first automatically, whenever every entry in the
    section carries a date, so the order they are written in does not matter.
 
+   `icon` names one of the section icons in assets/js/site.js: experience,
+   interests, news, publications, projects, awards, talks, teaching, service,
+   skills, contact.
+
    Item fields
      when    left column, free text
      what    bold first line
@@ -20,6 +24,7 @@
 window.CV = [
   {
     top: true,
+    icon: "experience",
     heading: { en: "Experience", zh: "经历" },
     items: [
       {
@@ -76,6 +81,7 @@ window.CV = [
     ]
   },
   {
+    icon: "awards",
     heading: { en: "Awards and Honours", zh: "奖励与荣誉" },
     items: [
       {
@@ -99,6 +105,7 @@ window.CV = [
     ]
   },
   {
+    icon: "talks",
     heading: { en: "Talks", zh: "学术报告" },
     items: [
       {
@@ -110,6 +117,7 @@ window.CV = [
     ]
   },
   {
+    icon: "teaching",
     heading: { en: "Teaching", zh: "教学" },
     items: [
       {
@@ -121,6 +129,7 @@ window.CV = [
     ]
   },
   {
+    icon: "service",
     heading: { en: "Academic Service", zh: "学术服务" },
     items: [
       {
@@ -171,6 +180,7 @@ window.CV = [
     ]
   },
   {
+    icon: "skills",
     heading: { en: "Skills", zh: "技能" },
     items: [
       {

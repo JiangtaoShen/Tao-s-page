@@ -187,6 +187,53 @@
     return ICONS[name] || ICONS.link;
   }
 
+  // Section heading icons, same inline-SVG approach as the link icons above.
+  var SECTION_ICONS = {
+    experience: strokeIcon('<rect x="2.6" y="7.4" width="18.8" height="12.6" rx="2"/>'
+      + '<path d="M8.6 7.4V5.6a2 2 0 0 1 2-2h2.8a2 2 0 0 1 2 2v1.8"/>'
+      + '<path d="M2.6 12.4h18.8"/>'),
+
+    interests: strokeIcon('<path d="M12 3.2a5.8 5.8 0 0 0-3.4 10.5c.6.45.95 1.1.95 1.8v.5h4.9v-.5'
+      + 'c0-.7.35-1.35.95-1.8A5.8 5.8 0 0 0 12 3.2Z"/>'
+      + '<path d="M9.55 18.4h4.9"/><path d="M10.4 21h3.2"/>'),
+
+    news: strokeIcon('<path d="M4 9.6h2.6L14 5.4v13.2L6.6 14.4H4a1.4 1.4 0 0 1-1.4-1.4v-2'
+      + 'A1.4 1.4 0 0 1 4 9.6Z"/>'
+      + '<path d="M17.6 9.4a3.6 3.6 0 0 1 0 5.2"/>'
+      + '<path d="M7.6 15.4v2.4a1.8 1.8 0 0 0 1.8 1.8h.6"/>'),
+
+    publications: strokeIcon('<path d="M3.4 5.2h4.8a3.8 3.8 0 0 1 3.8 3.8v10.6'
+      + 'a2.8 2.8 0 0 0-2.8-2.8H3.4Z"/>'
+      + '<path d="M20.6 5.2h-4.8a3.8 3.8 0 0 0-3.8 3.8v10.6a2.8 2.8 0 0 1 2.8-2.8h5.8Z"/>'),
+
+    projects: strokeIcon('<path d="M3 6.6a2 2 0 0 1 2-2h3.6l2 2.6H19a2 2 0 0 1 2 2v8.2'
+      + 'a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/>'),
+
+    awards: strokeIcon('<circle cx="12" cy="9" r="5.2"/>'
+      + '<path d="M8.6 13.6 7.2 21l4.8-2.6L16.8 21l-1.4-7.4"/>'),
+
+    talks: strokeIcon('<rect x="9.2" y="2.8" width="5.6" height="11" rx="2.8"/>'
+      + '<path d="M5.8 11.6a6.2 6.2 0 0 0 12.4 0"/><path d="M12 17.8V21"/>'),
+
+    teaching: strokeIcon('<path d="M12 3.6 1.8 8.4 12 13.2l10.2-4.8L12 3.6Z"/>'
+      + '<path d="M5.6 10.6V16c0 1.6 2.9 2.9 6.4 2.9s6.4-1.3 6.4-2.9v-5.4"/>'),
+
+    service: strokeIcon('<path d="M9 4.4H7a2 2 0 0 0-2 2v12.2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6.4'
+      + 'a2 2 0 0 0-2-2h-2"/>'
+      + '<rect x="9" y="2.6" width="6" height="3.6" rx="1"/>'
+      + '<path d="m9.4 13.2 1.9 1.9 3.6-3.6"/>'),
+
+    skills: strokeIcon('<path d="M14.6 6.4a3.6 3.6 0 0 1 4.9-3.3l-2.6 2.6.7 2.6 2.6.7 2.6-2.6'
+      + 'a3.6 3.6 0 0 1-4.6 4.4L6.3 20.8a2 2 0 1 1-2.8-2.8L15.5 9.6a3.6 3.6 0 0 1-.9-3.2Z"/>'),
+
+    contact: strokeIcon('<path d="M12 21.4s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/>'
+      + '<circle cx="12" cy="10.4" r="2.6"/>')
+  };
+
+  function sectionIcon(name) {
+    return name && SECTION_ICONS[name] ? SECTION_ICONS[name] : "";
+  }
+
   /* --- theme ------------------------------------------------------------ */
 
   // Inline so the icons never depend on a font that lacks the glyph.
@@ -567,7 +614,8 @@
         + (links ? '<div class="linkrow">' + links + "</div>" : "")
         + "</div></div>";
     }).join("");
-    return '<section><h2 class="section-title">' + esc(t(sec.heading)) + "</h2>"
+    return '<section><h2 class="section-title">' + sectionIcon(sec.icon)
+      + "<span>" + esc(t(sec.heading)) + "</span></h2>"
       + items + "</section>";
   }
 
@@ -592,7 +640,12 @@
 
   function applyStatic() {
     document.querySelectorAll("[data-i18n]").forEach(function (n) {
-      n.textContent = tr(n.getAttribute("data-i18n"));
+      var icon = sectionIcon(n.getAttribute("data-icon"));
+      if (icon) {
+        n.innerHTML = icon + "<span>" + esc(tr(n.getAttribute("data-i18n"))) + "</span>";
+      } else {
+        n.textContent = tr(n.getAttribute("data-i18n"));
+      }
     });
     document.querySelectorAll("[data-i18n-html]").forEach(function (n) {
       n.innerHTML = tr(n.getAttribute("data-i18n-html"));

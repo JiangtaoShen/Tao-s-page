@@ -179,6 +179,16 @@ section + section { margin-top: 2.8rem; }
   margin: 0 0 1.1rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+/* Slightly smaller than the link icons, to sit with the small caps. */
+.section-title .ico {
+  width: 14px;
+  height: 14px;
+  opacity: 1;
 }
 
 .page-title {

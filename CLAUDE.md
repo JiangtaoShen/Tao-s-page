@@ -35,6 +35,12 @@ chip text can change with the language while the filter keeps working. A chip
 is rendered for every declared topic even when nothing is tagged with it, so
 the three directions always read as a complete set.
 
+Every section heading carries a small icon. Static headings in `index.html`
+name theirs with `data-icon` beside `data-i18n`; CV sections name theirs with
+`icon` in `data/cv.js`. Both resolve against the `SECTION_ICONS` map in
+`site.js`. A heading without a match simply renders without an icon, so add the
+path to that map rather than inlining SVG in the markup.
+
 Contact link icons are inline SVG in the `ICONS` map in `site.js`, drawn in
 `currentColor` so they follow the link colour in both themes. Brand marks are
 stored as one unbroken string each: splitting a path across concatenated lines
