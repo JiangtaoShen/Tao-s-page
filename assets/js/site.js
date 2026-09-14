@@ -240,7 +240,9 @@
                + esc(t(l.label)) + "</a>";
       }).join("");
     var bio = list(p.bio).map(function (x) { return "<p>" + x + "</p>"; }).join("");
-    var second = alt(p.name);
+    // The Chinese name appears beside the English one only on the Chinese
+    // page. The English page shows the English name on its own.
+    var second = lang === "zh" ? alt(p.name) : "";
 
     el.className = "hero";
     el.innerHTML = photo
