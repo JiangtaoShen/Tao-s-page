@@ -627,16 +627,15 @@
   }
 
   // Books, listed the same way as papers but without filters: there are never
-  // enough of them to need narrowing. The section hides itself while empty,
-  // rather than standing on the page saying it has nothing in it.
+  // enough of them to need narrowing.
   function renderBooks() {
     var el = mount("book-list");
     if (!el) return;
     var books = PUBS.filter(isBook).slice()
       .sort(function (a, b) { return (b.year || 0) - (a.year || 0); });
-    var section = el.closest("section");
-    if (section) section.hidden = books.length === 0;
-    el.innerHTML = books.map(pubHtml).join("");
+    el.innerHTML = books.length
+      ? books.map(pubHtml).join("")
+      : '<p class="empty">' + esc(tr("empty.books")) + "</p>";
   }
 
   /* --- projects --------------------------------------------------------- */

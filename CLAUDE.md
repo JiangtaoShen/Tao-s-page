@@ -45,9 +45,10 @@ translated label goes through `trn`, which substitutes into the string rather
 than appending beside it, because the number falls in different places in the
 two languages.
 
-The books section hides itself while it is empty, instead of standing on the
-page announcing that it holds nothing, and the contents drawer skips hidden
-sections so it never offers a link to one.
+The books section stays on the page while it is empty, showing the same empty
+line the projects section would. The contents drawer still skips any section
+marked hidden, so nothing that starts hiding itself later leaves a link
+pointing at an invisible heading.
 
 Author position is derived, not stored twice. First authorship is read off the
 first entry of `authors` by `isLeadAuthor`, which compares against

@@ -68,7 +68,7 @@ Chinese if their browser prefers it, English otherwise.
 **A publication.** Append an entry to `window.PUBLICATIONS` in
 `data/publications.js`. Entries are grouped and sorted by year automatically.
 Set `type` to say what it is. `book`, `chapter` and `monograph` appear in the
-Books section, which stays hidden until there is something in it; everything
+Books section; everything
 else appears under Publications, where `journal` and `conference` can be
 filtered apart. For a book, `venue` holds the publisher.
 

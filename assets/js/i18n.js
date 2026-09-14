@@ -41,6 +41,7 @@ window.I18N = {
 
     "empty.pubs":           "No matching publications.",
     "empty.projects":       "Nothing here yet.",
+    "empty.books":          "Nothing here yet.",
     "empty.news":           "No news yet.",
 
     "footer.updated":       "Last updated",
@@ -82,6 +83,7 @@ window.I18N = {
 
     "empty.pubs":           "没有符合条件的论文。",
     "empty.projects":       "暂无内容。",
+    "empty.books":          "暂无内容。",
     "empty.news":           "暂无动态。",
 
     "footer.updated":       "最后更新于",
