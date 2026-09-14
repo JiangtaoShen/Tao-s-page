@@ -105,30 +105,6 @@ window.CV = [
     ]
   },
   {
-    icon: "talks",
-    heading: { en: "Talks", zh: "学术报告" },
-    items: [
-      {
-        when: "TODO",
-        what: { en: "TODO: Talk title", zh: "TODO: 报告题目" },
-        where: { en: "TODO: Venue", zh: "TODO: 场合" },
-        detail: ""
-      }
-    ]
-  },
-  {
-    icon: "teaching",
-    heading: { en: "Teaching", zh: "教学" },
-    items: [
-      {
-        when: "TODO",
-        what: { en: "TODO: Course code and name", zh: "TODO: 课程编号与名称" },
-        where: { en: "TODO: Role", zh: "TODO: 承担角色" },
-        detail: ""
-      }
-    ]
-  },
-  {
     icon: "service",
     heading: { en: "Academic Service", zh: "学术服务" },
     items: [
