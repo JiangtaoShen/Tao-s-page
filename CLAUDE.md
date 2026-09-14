@@ -19,7 +19,9 @@ by GitHub Pages.
   `assets/js/i18n.js` under both `en` and `zh`, referenced from markup with
   `data-i18n`. Never hardcode display text in `site.js` or in a page.
 - **Colors come from the tokens on `:root` in `assets/css/style.css`.** Dark mode
-  overrides token values only. A hardcoded hex anywhere else is a bug.
+  overrides token values only. A hardcoded hex anywhere else is a bug. The light
+  palette is warm throughout: the ground is cream, and the greys carry the same
+  warmth, so never drop a cool grey into it.
 - **Do not invent academic facts.** Titles, venues, coauthors, dates, awards and
   affiliations come only from material the user supplies. Placeholders are marked
   `TODO:` and must stay obviously fake until replaced.
@@ -60,7 +62,8 @@ drops the separator and silently corrupts the glyph.
 
 ## Visual direction
 
-Minimal academic: white ground, a single restrained blue accent, hairline rules,
+Minimal academic: a warm cream ground in light mode, a single restrained blue
+accent, hairline rules,
 generous whitespace, a measure of 880px. No gradients, no drop shadows, no
 animation beyond a link underline.
 

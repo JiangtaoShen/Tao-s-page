@@ -55,15 +55,19 @@
    ========================================================================== */
 
 :root {
-  --bg:            #ffffff;
-  --bg-subtle:     #fafafa;
-  --fg:            #1c1c1e;
-  --fg-muted:      #6b7280;
-  --fg-faint:      #9ca3af;
-  --rule:          #e8e8ea;
+  /* A warm, faintly yellow ground rather than white, and every neutral warmed
+     to match. A cool grey rule or a cool grey caption on a cream page reads as
+     a mistake, so the whole light palette shifts together. Dark mode is
+     unchanged. */
+  --bg:            #faf9f5;
+  --bg-subtle:     #f3f0e8;
+  --fg:            #1f1e1b;
+  --fg-muted:      #6b6558;
+  --fg-faint:      #9a948a;
+  --rule:          #e7e3d8;
   --accent:        #1a4f8a;
-  --accent-soft:   #eef3f9;
-  --tag-bg:        #f2f3f5;
+  --accent-soft:   #e9eff7;
+  --tag-bg:        #efebe1;
 
   /* One typeface, everywhere. Chinese has no webfont, so it falls through to
      the platform UI face; that is the only second face on the page. */
