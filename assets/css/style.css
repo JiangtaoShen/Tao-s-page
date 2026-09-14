@@ -1,4 +1,54 @@
 /* ==========================================================================
+   Source Serif 4, self-hosted. One typeface for the whole site.
+
+   The files are the Latin subsets of the variable font, served by Google Fonts
+   and copied into assets/fonts/, so the page makes no external request and
+   still works opened straight from the filesystem. Each file covers a weight
+   range, which is why one file answers for both the regular and the semibold.
+   The browser downloads only the subsets a page actually needs.
+
+   Chinese is not covered: a full CJK face runs to several megabytes and
+   trimming one down needs a build step, which this project does not have. So
+   Chinese falls through to the system UI face on each platform.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("../fonts/source-serif-4-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("../fonts/source-serif-4-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: italic;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("../fonts/source-serif-4-latin-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: italic;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("../fonts/source-serif-4-latin-ext-italic.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ==========================================================================
    Academic homepage - minimal theme
    All colors are declared as tokens on :root, so dark mode only needs to
    override token values.
@@ -15,16 +65,18 @@
   --accent-soft:   #eef3f9;
   --tag-bg:        #f2f3f5;
 
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-               "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
-  --font-serif: Georgia, "Iowan Old Style", "Times New Roman", "Songti SC",
-                "Noto Serif CJK SC", "Source Han Serif SC", SimSun, serif;
+  /* One typeface, everywhere. Chinese has no webfont, so it falls through to
+     the platform UI face; that is the only second face on the page. */
+  --font-main: "Source Serif 4", Georgia, "Times New Roman",
+               "PingFang SC", "Microsoft YaHei", serif;
+
+  /* Code blocks only, and those appear on project detail pages, never here. */
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
   /* Wide enough that the longest affiliation line in the experience list stays
-     on one row. That line needs about 612px beside the 131px date column, so
-     anything under roughly 810px wraps it. */
-  --measure: 840px;
+     on one row. In Source Serif that line needs 659px beside the 131px date
+     column, so anything under roughly 855px wraps it. */
+  --measure: 880px;
 }
 
 html[data-theme="dark"] {
@@ -65,7 +117,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-sans);
+  font-family: var(--font-main);
   font-size: 16px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
@@ -111,7 +163,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 }
 
 .brand {
-  font-family: var(--font-serif);
+  font-family: var(--font-main);
   font-size: 1.12rem;
   font-weight: 600;
   color: var(--fg);
@@ -194,7 +246,7 @@ section + section { margin-top: 2.8rem; }
 .page-title {
   font-size: 1.75rem;
   margin: 0 0 0.4rem;
-  font-family: var(--font-serif);
+  font-family: var(--font-main);
 }
 
 .page-lede { color: var(--fg-muted); margin: 0 0 2rem; }
@@ -221,7 +273,7 @@ section + section { margin-top: 2.8rem; }
 .hero-body { flex: 1 1 320px; min-width: 0; }
 
 .hero-name {
-  font-family: var(--font-serif);
+  font-family: var(--font-main);
   font-size: 2rem;
   margin: 0 0 0.15rem;
   letter-spacing: -0.02em;
@@ -336,7 +388,8 @@ a:hover > .ico { opacity: 1; }
 .year-group { margin-bottom: 2rem; }
 
 .year-label {
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
+  font-variant-numeric: tabular-nums;
   font-size: 0.8rem;
   color: var(--fg-faint);
   letter-spacing: 0.08em;
