@@ -482,11 +482,7 @@
       var items = pool.filter(function (p) {
         if (pubState.topic !== "all"
             && list(p.topic).map(String).indexOf(pubState.topic) === -1) return false;
-        if (pubState.role !== "all") {
-          var lead = isLeadAuthor(p);
-          if (pubState.role === "lead" && !lead) return false;
-          if (pubState.role === "co" && lead) return false;
-        }
+        if (pubState.role === "lead" && !isLeadAuthor(p)) return false;
         return true;
       });
 
@@ -544,8 +540,7 @@
       ))
       + row("role", [
           chip("role", "all", tr("filter.allRoles")),
-          chip("role", "lead", tr("filter.lead")),
-          chip("role", "co", tr("filter.coauthor"))
+          chip("role", "lead", tr("filter.lead"))
         ]);
 
     bar.querySelectorAll(".filters").forEach(function (group) {
