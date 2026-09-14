@@ -1,6 +1,12 @@
 /* ==========================================================================
    CV sections. Each section renders as a two-column list: when | what.
 
+   A section marked `top: true` renders near the head of the page, above the
+   research interests. Everything else renders further down.
+
+   Entries are sorted newest first automatically, whenever every entry in the
+   section carries a date, so the order they are written in does not matter.
+
    Item fields
      when    left column, free text
      what    bold first line
@@ -13,6 +19,7 @@
 
 window.CV = [
   {
+    top: true,
     heading: { en: "Education", zh: "教育经历" },
     items: [
       {
@@ -57,6 +64,7 @@ window.CV = [
     ]
   },
   {
+    top: true,
     heading: { en: "Experience", zh: "工作经历" },
     items: [
       {

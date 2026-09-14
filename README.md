@@ -9,8 +9,8 @@ works, including straight from the local filesystem.
 ## Structure
 
 ```
-index.html            The whole site: about, interests, news, publications,
-                      projects, CV and contact, in that order
+index.html            The whole site: about, education, experience, interests,
+                      news, publications, projects, the rest of the CV, contact
 projects/_template.html   Copy this to create a per-project detail page
 
 data/site.js          Profile, contact links, news          <- edit these
@@ -91,6 +91,16 @@ read it.
 **A demo.** Put an `.mp4` or `.webm` in `assets/demo/` and point the project's
 `media` field at it. Video files autoplay muted and loop on the card. Keep them
 under a few megabytes; GitHub Pages has no streaming.
+
+**A CV entry.** Append it to the right section in `data/cv.js`, anywhere in the
+list. Sections whose entries all carry a date are sorted newest first for you,
+so position in the file does not matter; an entry running to the present is
+written as `2026.09 - present` or `2026.09 至今` and sorts above everything.
+Sections without dates, such as Skills, keep the order you write.
+
+A section marked `top: true` appears near the head of the page, above the
+research interests. Education and experience are marked that way; the rest sit
+below the projects.
 
 **A PDF.** Put it in `assets/pdf/` and reference it as `assets/pdf/name.pdf`.
 

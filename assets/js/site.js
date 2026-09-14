@@ -515,27 +515,77 @@
 
   /* --- cv --------------------------------------------------------------- */
 
-  function renderCV() {
-    var el = mount("cv");
-    if (!el) return;
-    el.innerHTML = CV.map(function (sec) {
-      var items = (sec.items || []).map(function (it) {
-        var links = (it.links || []).filter(function (l) { return has(t(l.url)); })
-          .map(function (l) {
-            return '<a href="' + esc(url(l.url)) + '" target="_blank" rel="noopener">'
-                   + esc(t(l.label)) + "</a>";
-          }).join("");
-        return '<div class="entry">'
-          + '<div class="entry-when">' + esc(t(it.when) || "") + "</div>"
-          + '<div class="entry-what"><strong>' + esc(t(it.what) || "") + "</strong>"
-          + (has(t(it.where)) ? '<div class="where">' + esc(t(it.where)) + "</div>" : "")
-          + (has(t(it.detail)) ? '<p class="detail">' + esc(t(it.detail)) + "</p>" : "")
-          + (links ? '<div class="linkrow">' + links + "</div>" : "")
-          + "</div></div>";
-      }).join("");
-      return '<section><h2 class="section-title">' + esc(t(sec.heading)) + "</h2>"
-        + items + "</section>";
+  // Ranks a `when` string so entries can be ordered newest first. Reads every
+  // year in the text and keeps the latest, so a range like "2025.04 - 2026.09"
+  // ranks on its end date. An ongoing entry outranks everything. Returns null
+  // when there is no date at all.
+  var ONGOING = 9e6;
+
+  function whenRank(v) {
+    var texts = [];
+    if (v && typeof v === "object" && !Array.isArray(v)) {
+      LANGS.forEach(function (l) { if (has(v[l])) texts.push(String(v[l])); });
+    } else if (has(v)) {
+      texts.push(String(v));
+    }
+    var joined = texts.join(" ");
+    if (/present|current|ongoing|\u81F3\u4ECA|\u73B0\u5728/i.test(joined)) return ONGOING;
+
+    var re = /(?:19|20)\d{2}(?:[.\-\/](\d{1,2}))?/g;
+    var best = null;
+    var m;
+    while ((m = re.exec(joined)) !== null) {
+      var score = parseInt(m[0].slice(0, 4), 10) * 12 + (m[1] ? parseInt(m[1], 10) : 0);
+      if (best === null || score > best) best = score;
+    }
+    return best;
+  }
+
+  // Sorts newest first, but only when every entry carries a date. Sections like
+  // Skills, whose left column holds a category rather than a year, are left in
+  // the order the data file declares.
+  function sortItems(items) {
+    var ranked = items.map(function (it, i) { return { it: it, r: whenRank(it.when), i: i }; });
+    var datedThroughout = ranked.every(function (x) { return x.r !== null; });
+    if (!datedThroughout) return items;
+    return ranked.sort(function (a, b) { return (b.r - a.r) || (a.i - b.i); })
+      .map(function (x) { return x.it; });
+  }
+
+  function cvSectionHtml(sec) {
+    var items = sortItems(sec.items || []).map(function (it) {
+      var links = (it.links || []).filter(function (l) { return has(t(l.url)); })
+        .map(function (l) {
+          return '<a href="' + esc(url(l.url)) + '" target="_blank" rel="noopener">'
+                 + esc(t(l.label)) + "</a>";
+        }).join("");
+      return '<div class="entry">'
+        + '<div class="entry-when">' + esc(t(it.when) || "") + "</div>"
+        + '<div class="entry-what"><strong>' + esc(t(it.what) || "") + "</strong>"
+        + (has(t(it.where)) ? '<div class="where">' + esc(t(it.where)) + "</div>" : "")
+        + (has(t(it.detail)) ? '<p class="detail">' + esc(t(it.detail)) + "</p>" : "")
+        + (links ? '<div class="linkrow">' + links + "</div>" : "")
+        + "</div></div>";
     }).join("");
+    return '<section><h2 class="section-title">' + esc(t(sec.heading)) + "</h2>"
+      + items + "</section>";
+  }
+
+  // Sections flagged `top: true` render into #cv-top, near the head of the page;
+  // the rest go to #cv. With only one of the two mounts present, everything
+  // lands there.
+  function renderCV() {
+    var top = mount("cv-top");
+    var rest = mount("cv");
+    if (!top && !rest) return;
+
+    function html(list) { return list.map(cvSectionHtml).join(""); }
+
+    if (!top) { rest.innerHTML = html(CV); return; }
+    if (!rest) { top.innerHTML = html(CV); return; }
+
+    top.innerHTML = html(CV.filter(function (sec) { return sec.top; }));
+    rest.innerHTML = html(CV.filter(function (sec) { return !sec.top; }));
   }
 
   /* --- static markup ---------------------------------------------------- */

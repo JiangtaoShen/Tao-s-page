@@ -62,7 +62,8 @@ mount just the header and footer:
 | `pub-toolbar`  | type and topic filter chips plus search box        |
 | `pub-list`     | publications, grouped by year; `data-selected="true"` would narrow it to the flagged subset |
 | `project-list` | project cards; `data-featured="true"` would narrow it likewise |
-| `cv`           | CV sections, each rendering its own heading         |
+| `cv-top`       | CV sections flagged `top: true`, rendered near the head of the page |
+| `cv`           | the remaining CV sections, each with its own heading |
 | `site-footer`  | copyright and last-updated line                    |
 
 Static markup is translated through `data-i18n` (textContent), `data-i18n-html`
@@ -81,9 +82,20 @@ language switch.
 Pages in a subdirectory set `window.BASE = "../"` before the script tag. The
 `url()` helper prefixes local paths with it and leaves absolute URLs alone.
 
-The CV block is a bare div wrapping several sections, so vertical rhythm keys
+The CV renders in two places. A section carrying `top: true` in `data/cv.js`
+goes to `#cv-top`, directly under the hero: today that is education and
+experience. The rest go to `#cv`, below the projects. With only one of the two
+mounts on a page, everything lands there.
+
+CV entries are ordered newest first by `sortItems`, which ranks the `when` text
+by the latest year it contains, treats present and 至今 as ongoing, and reads
+both languages so the order never changes with the language. A section is only
+sorted when every entry yields a date, which leaves Skills and Academic Service
+in the order the data file declares. So do not hand-order dated sections.
+
+Both CV blocks are bare divs wrapping several sections, so vertical rhythm keys
 off `main > * + *` as well as `section + section`. Dropping either rule leaves
-the CV touching its neighbours.
+them touching their neighbours.
 
 ## Status
 
