@@ -70,13 +70,21 @@
   --font-main: "Source Serif 4", Georgia, "Times New Roman",
                "PingFang SC", "Microsoft YaHei", serif;
 
+  /* Three sizes for the whole page, and no others. Large is the name, base is
+     anything a reader actually reads, small is metadata and chrome: dates,
+     labels, authors, venues, chips, captions, the footer. Adding a fourth is
+     how a page starts to look busy. */
+  --fs-lg:   2rem;
+  --fs-base: 1rem;
+  --fs-sm:   0.875rem;
+
   /* Code blocks only, and those appear on project detail pages, never here. */
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
   /* Wide enough that the longest affiliation line in the experience list stays
-     on one row. In Source Serif that line needs 659px beside the 131px date
-     column, so anything under roughly 855px wraps it. */
-  --measure: 880px;
+     on one row. At the small size that line needs 626px beside the 131px date
+     column, so anything under 820px wraps it. */
+  --measure: 860px;
 }
 
 html[data-theme="dark"] {
@@ -118,7 +126,7 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-main);
-  font-size: 16px;
+  font-size: var(--fs-base);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
@@ -141,7 +149,7 @@ h1, h2, h3 { line-height: 1.3; font-weight: 600; letter-spacing: -0.01em; }
 
 img { max-width: 100%; height: auto; }
 
-code { font-family: var(--font-mono); font-size: 0.9em; }
+code { font-family: var(--font-mono); font-size: var(--fs-sm); }
 
 /* --- header ------------------------------------------------------------- */
 
@@ -164,7 +172,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 
 .brand {
   font-family: var(--font-main);
-  font-size: 1.12rem;
+  font-size: var(--fs-base);
   font-weight: 600;
   color: var(--fg);
   border: 0;
@@ -188,7 +196,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
   width: 30px; height: 30px;
   line-height: 1;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -199,7 +207,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 
 .lang-toggle {
   font: inherit;
-  font-size: 0.78rem;
+  font-size: var(--fs-sm);
   letter-spacing: 0.03em;
   background: none;
   border: 1px solid var(--rule);
@@ -223,7 +231,7 @@ main > * + * { margin-top: 2.8rem; }
 section + section { margin-top: 2.8rem; }
 
 .section-title {
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -244,7 +252,7 @@ section + section { margin-top: 2.8rem; }
 }
 
 .page-title {
-  font-size: 1.75rem;
+  font-size: var(--fs-lg);
   margin: 0 0 0.4rem;
   font-family: var(--font-main);
 }
@@ -274,27 +282,27 @@ section + section { margin-top: 2.8rem; }
 
 .hero-name {
   font-family: var(--font-main);
-  font-size: 2rem;
+  font-size: var(--fs-lg);
   margin: 0 0 0.15rem;
   letter-spacing: -0.02em;
 }
 
 .hero-alt {
-  font-size: 0.62em;
+  font-size: var(--fs-base);
   font-weight: 400;
   color: var(--fg-muted);
   letter-spacing: 0;
   margin-left: 0.15em;
 }
 
-.hero-role { color: var(--fg-muted); margin: 0 0 0.9rem; font-size: 1rem; }
+.hero-role { color: var(--fg-muted); margin: 0 0 0.9rem; font-size: var(--fs-base); }
 .hero-role .affil { display: block; }
 
 .hero-links {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1.05rem;
-  font-size: 0.92rem;
+  font-size: var(--fs-sm);
   margin-top: 0.9rem;
 }
 
@@ -330,7 +338,7 @@ a:hover > .ico { opacity: 1; }
   gap: 1rem;
   padding: 0.5rem 0;
   border-bottom: 1px dashed var(--rule);
-  font-size: 0.95rem;
+  font-size: var(--fs-base);
 }
 .news li:last-child { border-bottom: 0; }
 
@@ -339,7 +347,7 @@ a:hover > .ico { opacity: 1; }
   width: 6.6rem;
   color: var(--fg-faint);
   font-variant-numeric: tabular-nums;
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
   padding-top: 0.12rem;
 }
 
@@ -357,7 +365,7 @@ a:hover > .ico { opacity: 1; }
 
 .chip {
   font: inherit;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--fg-muted);
   background: none;
   border: 1px solid var(--rule);
@@ -374,7 +382,7 @@ a:hover > .ico { opacity: 1; }
 
 .search {
   font: inherit;
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
   color: var(--fg);
   background: var(--bg);
   border: 1px solid var(--rule);
@@ -390,7 +398,7 @@ a:hover > .ico { opacity: 1; }
 .year-label {
   font-family: var(--font-main);
   font-variant-numeric: tabular-nums;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   color: var(--fg-faint);
   letter-spacing: 0.08em;
   margin: 0 0 0.7rem;
@@ -418,21 +426,21 @@ a:hover > .ico { opacity: 1; }
 
 .pub-title {
   margin: 0 0 0.2rem;
-  font-size: 1rem;
+  font-size: var(--fs-base);
   font-weight: 600;
   line-height: 1.45;
 }
 
-.pub-authors { margin: 0 0 0.15rem; font-size: 0.9rem; color: var(--fg-muted); }
+.pub-authors { margin: 0 0 0.15rem; font-size: var(--fs-sm); color: var(--fg-muted); }
 .pub-authors .me { color: var(--fg); font-weight: 600; }
 
-.pub-venue { margin: 0; font-size: 0.9rem; color: var(--fg-muted); font-style: italic; }
+.pub-venue { margin: 0; font-size: var(--fs-sm); color: var(--fg-muted); font-style: italic; }
 
 .pub-note {
   display: inline-block;
   margin-left: 0.4rem;
   font-style: normal;
-  font-size: 0.76rem;
+  font-size: var(--fs-sm);
   color: var(--accent);
   border: 1px solid currentColor;
   border-radius: 3px;
@@ -445,7 +453,7 @@ a:hover > .ico { opacity: 1; }
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: 0.4rem;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
 }
 .linkrow a { color: var(--fg-muted); }
 .linkrow a:hover { color: var(--accent); }
@@ -483,19 +491,19 @@ a:hover > .ico { opacity: 1; }
   flex-direction: column;
 }
 
-.card-title { margin: 0 0 0.35rem; font-size: 1rem; }
+.card-title { margin: 0 0 0.35rem; font-size: var(--fs-base); }
 .card-title a { color: var(--fg); border: 0; }
 .card-title a:hover { color: var(--accent); }
 
 .card-period {
   margin: 0 0 0.35rem;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   color: var(--fg-faint);
 }
 
 .card-text {
   margin: 0 0 0.7rem;
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   color: var(--fg-muted);
   flex: 1 1 auto;
 }
@@ -503,7 +511,7 @@ a:hover > .ico { opacity: 1; }
 .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.6rem; }
 
 .tag {
-  font-size: 0.74rem;
+  font-size: var(--fs-sm);
   color: var(--fg-muted);
   background: var(--tag-bg);
   border-radius: 3px;
@@ -524,31 +532,31 @@ a:hover > .ico { opacity: 1; }
   flex: none;
   width: 8.2rem;
   color: var(--fg-faint);
-  font-size: 0.86rem;
+  font-size: var(--fs-sm);
   font-variant-numeric: tabular-nums;
   padding-top: 0.15rem;
 }
 
 .entry-what { min-width: 0; }
 .entry-what strong { font-weight: 600; }
-.entry-what .where { color: var(--fg-muted); font-size: 0.93rem; }
-.entry-what .detail { color: var(--fg-muted); font-size: 0.9rem; margin: 0.2rem 0 0; }
+.entry-what .where { color: var(--fg-muted); font-size: var(--fs-sm); }
+.entry-what .detail { color: var(--fg-muted); font-size: var(--fs-sm); margin: 0.2rem 0 0; }
 
 .postal {
   font-style: normal;
   color: var(--fg-muted);
-  font-size: 0.93rem;
+  font-size: var(--fs-sm);
   line-height: 1.55;
 }
 
 /* --- project detail page ------------------------------------------------ */
 
-.prose h2 { font-size: 1.15rem; margin: 2rem 0 0.6rem; }
-.prose h3 { font-size: 1rem; margin: 1.4rem 0 0.4rem; }
+.prose h2 { font-size: var(--fs-base); margin: 2rem 0 0.6rem; }
+.prose h3 { font-size: var(--fs-base); margin: 1.4rem 0 0.4rem; }
 .prose p { margin: 0 0 1rem; }
 .prose ul, .prose ol { margin: 0 0 1rem; padding-left: 1.3rem; }
 .prose figure { margin: 1.6rem 0; }
-.prose figcaption { font-size: 0.85rem; color: var(--fg-muted); margin-top: 0.5rem; }
+.prose figcaption { font-size: var(--fs-sm); color: var(--fg-muted); margin-top: 0.5rem; }
 .prose video, .prose img { border-radius: 6px; border: 1px solid var(--rule); width: 100%; }
 .prose blockquote {
   margin: 1.2rem 0;
@@ -562,11 +570,11 @@ a:hover > .ico { opacity: 1; }
   border-radius: 6px;
   padding: 0.85rem 1rem;
   overflow-x: auto;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
 }
 
 .backlink {
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
   color: var(--fg-muted);
   display: inline-block;
   margin-bottom: 1.2rem;
@@ -576,7 +584,7 @@ a:hover > .ico { opacity: 1; }
 
 .empty {
   color: var(--fg-faint);
-  font-size: 0.92rem;
+  font-size: var(--fs-sm);
   padding: 1.2rem 0;
   text-align: center;
 }
@@ -586,7 +594,7 @@ a:hover > .ico { opacity: 1; }
   margin-top: 3.5rem;
   padding-block: 1.5rem 2.5rem;
   color: var(--fg-faint);
-  font-size: 0.84rem;
+  font-size: var(--fs-sm);
 }
 
 .site-footer .wrap {
@@ -603,10 +611,10 @@ a:hover > .ico { opacity: 1; }
 }
 
 @media (max-width: 620px) {
+  :root { --fs-lg: 1.7rem; }
   .news time { width: 5.4rem; }
   .pub-thumb { display: none; }
   .hero-photo { width: 110px; }
-  .hero-name { font-size: 1.7rem; }
 
   /* A date range and a job title will not both fit across a phone, so the
      two columns become two stacked lines. */

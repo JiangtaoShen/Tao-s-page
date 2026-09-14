@@ -49,8 +49,15 @@ drops the separator and silently corrupts the glyph.
 ## Visual direction
 
 Minimal academic: white ground, a single restrained blue accent, hairline rules,
-generous whitespace, a measure of 880px. No gradients, no drop shadows, no
+generous whitespace, a measure of 860px. No gradients, no drop shadows, no
 animation beyond a link underline.
+
+**Three sizes, and no others.** `--fs-lg` is the name, `--fs-base` is anything
+a reader actually reads, `--fs-sm` is metadata and chrome: dates, section
+labels, authors, venues, chips, tags, captions, the footer. Never write a raw
+`font-size` value; reach for the token that fits the tier. The name is the only
+size that changes on a phone, and it changes by redefining `--fs-lg` in the
+media query rather than by overriding the rule.
 
 **One typeface, everywhere.** The page is set entirely in Source Serif 4, which
 is self-hosted in `assets/fonts/` as the Latin subsets of the variable font, so
@@ -60,10 +67,10 @@ for code blocks alone, which appear only on project detail pages. Chinese has
 no webfont, since a CJK face runs to megabytes and subsetting needs a build
 step, so it falls through to the platform UI face.
 
-The measure is tied to the typeface. Source Serif sets the longest affiliation
-line at 659px beside the 131px date column; a narrower face would allow a
-narrower measure, and a wider one would wrap that line. Re-measure before
-changing either.
+The measure is tied to the typeface and the small size together. Source Serif
+at `--fs-sm` sets the longest affiliation line at 626px beside the 131px date
+column, so the measure cannot drop below 820px without wrapping it. Re-measure
+before changing any of the three.
 
 ## Rendering model
 

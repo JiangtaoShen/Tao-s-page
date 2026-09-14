@@ -145,6 +145,8 @@ bare `https://jiangtaoshen.github.io/`, rename the repository to
   `assets/js/site.js`, so generated links resolve.
 - Data files are UTF-8 and contain Chinese characters directly, not escape
   sequences. Keep them that way so they stay editable.
+- The page uses three font sizes only: `--fs-lg` for the name, `--fs-base` for
+  text, `--fs-sm` for metadata. Use a token, never a raw size.
 - The whole page is set in one typeface, Source Serif 4, self-hosted in
   `assets/fonts/`. No CDN, so the page still works offline. Monospace is used
   for code blocks only. Chinese falls through to the platform font, because a
