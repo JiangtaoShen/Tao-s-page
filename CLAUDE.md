@@ -27,6 +27,11 @@ Publication topic tags are the one exception to the bilingual rule. A tag is
 both the chip label and the filter key, so a translated tag would break the
 filter when the reader switches language. Keep `topic` values in one language.
 
+Contact link icons are inline SVG in the `ICONS` map in `site.js`, drawn in
+`currentColor` so they follow the link colour in both themes. Brand marks are
+stored as one unbroken string each: splitting a path across concatenated lines
+drops the separator and silently corrupts the glyph.
+
 ## Visual direction
 
 Minimal academic: white ground, a single restrained blue accent, hairline rules,

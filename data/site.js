@@ -73,13 +73,15 @@ window.SITE = {
   },
 
   // Anything with an empty url is skipped when rendering.
+  // The icon field picks one of the inline icons in assets/js/site.js: email,
+  // scholar, github, orcid, linkedin, cv, link. Omit it and the URL decides.
   links: [
-    { label: { en: "Email", zh: "邮箱" }, url: "mailto:Jiangtao.Shen@earlham.ac.uk" },
-    { label: "Google Scholar", url: "https://scholar.google.com/citations?user=qWzre2gAAAAJ" },
-    { label: "GitHub",         url: "https://github.com/JiangtaoShen" },
-    { label: "ORCID",          url: "https://orcid.org/0000-0002-2070-940X" },
-    { label: "LinkedIn",       url: "" },
-    { label: { en: "CV (PDF)", zh: "简历 (PDF)" }, url: "assets/pdf/cv.pdf" }
+    { icon: "email",    label: { en: "Email", zh: "邮箱" }, url: "mailto:Jiangtao.Shen@earlham.ac.uk" },
+    { icon: "scholar",  label: "Google Scholar", url: "https://scholar.google.com/citations?user=qWzre2gAAAAJ" },
+    { icon: "github",   label: "GitHub",         url: "https://github.com/JiangtaoShen" },
+    { icon: "orcid",    label: "ORCID",          url: "https://orcid.org/0000-0002-2070-940X" },
+    { icon: "linkedin", label: "LinkedIn",       url: "" },
+    { icon: "cv",       label: { en: "CV (PDF)", zh: "简历 (PDF)" }, url: "assets/pdf/cv.pdf" }
   ],
 
   // Newest first. Simple HTML such as <em> and <a> is allowed in `text`.

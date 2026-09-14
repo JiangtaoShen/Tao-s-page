@@ -77,6 +77,12 @@ under a few megabytes; GitHub Pages has no streaming.
 
 **A PDF.** Put it in `assets/pdf/` and reference it as `assets/pdf/name.pdf`.
 
+**A contact link.** Each entry in `SITE.links` may carry an `icon` naming one
+of the inline SVG icons in `assets/js/site.js`: email, scholar, github, orcid,
+linkedin, cv, link. Omit it and the destination decides, so a mailto link gets
+the envelope and a .pdf gets the document icon without any extra work. To add a
+new icon, put its path in the `ICONS` map; do not pull in an icon font or a CDN.
+
 **Contact details.** `profile.email` and `profile.address` in `data/site.js` feed
 the Contact section at the foot of the homepage. The address is one array entry
 per line and stays in English in both languages, because a postal service has to
