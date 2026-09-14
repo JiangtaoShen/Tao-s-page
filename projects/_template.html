@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- ===========================================================================
+     Template for a project detail page.
+
+     To add a project page:
+       1. copy this file to projects/<id>.html, where <id> matches the `id`
+          field of the entry in data/projects.js
+       2. set `detail: true` on that entry so the card links here
+       3. fill in the title, meta description and the body below
+
+     Every asset path on this page is relative to the site root, because
+     window.BASE is set to "../" for the shared script.
+     =========================================================================== -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-suffix="Project">TODO: Project title</title>
+<meta name="description" content="TODO: one sentence about this project.">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  window.BASE = "../";
+  try {
+    var t = localStorage.getItem("theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+</script>
+</head>
+<body>
+
+<header id="site-header"></header>
+
+<main class="wrap">
+
+  <a class="backlink" href="../projects.html">&larr; All projects</a>
+
+  <h1 class="page-title">TODO: Project title</h1>
+  <p class="page-lede">TODO: one line summary, authors, venue.</p>
+
+  <div class="linkrow" style="margin-bottom:2rem;font-size:0.9rem">
+    <a href="#" target="_blank" rel="noopener">Paper</a>
+    <a href="#" target="_blank" rel="noopener">Code</a>
+    <a href="#" target="_blank" rel="noopener">Demo</a>
+    <a href="#" target="_blank" rel="noopener">Data</a>
+  </div>
+
+  <div class="prose">
+
+    <figure>
+      <!-- Image, or a looping video:
+           <video src="../assets/demo/xxx.mp4" autoplay muted loop playsinline></video> -->
+      <img src="../assets/img/TODO.png" alt="TODO">
+      <figcaption>TODO: what the figure shows.</figcaption>
+    </figure>
+
+    <h2>Overview</h2>
+    <p>TODO</p>
+
+    <h2>Method</h2>
+    <p>TODO</p>
+
+    <h2>Results</h2>
+    <p>TODO</p>
+
+    <h2>Citation</h2>
+    <pre><code>@inproceedings{TODO,
+  title     = {TODO},
+  author    = {Shen, Jiangtao and TODO},
+  booktitle = {TODO},
+  year      = {2026}
+}</code></pre>
+
+  </div>
+
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="../data/site.js"></script>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

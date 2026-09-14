@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-suffix="About">Jiangtao Shen</title>
+<meta name="description" content="Academic homepage of Jiangtao Shen.">
+<meta name="author" content="Jiangtao Shen">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+  // Applied before first paint so the page never flashes the wrong theme.
+  try {
+    var t = localStorage.getItem("theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+</script>
+</head>
+<body>
+
+<header id="site-header"></header>
+
+<main class="wrap">
+
+  <section id="hero"></section>
+
+  <section>
+    <h2 class="section-title">Research Interests</h2>
+    <div id="interests"></div>
+  </section>
+
+  <section>
+    <h2 class="section-title">News</h2>
+    <ul id="news"></ul>
+  </section>
+
+  <section>
+    <h2 class="section-title">Selected Publications</h2>
+    <div id="pub-list" data-selected="true"></div>
+    <p style="margin-top:1rem;font-size:0.9rem">
+      <a href="publications.html">All publications &rarr;</a>
+    </p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Featured Projects</h2>
+    <div id="project-list" data-featured="true"></div>
+    <p style="margin-top:1rem;font-size:0.9rem">
+      <a href="projects.html">All projects &rarr;</a>
+    </p>
+  </section>
+
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="data/site.js"></script>
+<script src="data/publications.js"></script>
+<script src="data/projects.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
