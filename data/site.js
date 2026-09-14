@@ -58,19 +58,16 @@ window.SITE = {
       ]
     },
 
-    // Taken from the keyword list on ORCID.
     interests: {
       en: [
         "Knowledge-based optimization",
-        "Expensive optimization",
-        "Evolutionary algorithms",
-        "Surrogate modelling"
+        "Physics-informed neural networks",
+        "Agent-based algorithm discovery"
       ],
       zh: [
-        "知识驱动的优化",
-        "昂贵优化问题",
-        "演化算法",
-        "代理模型"
+        "基于知识的优化",
+        "物理信息神经网络",
+        "基于 Agent 的算法发现"
       ]
     }
   },
