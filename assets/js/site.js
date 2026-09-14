@@ -403,12 +403,36 @@
 
   /* --- publications ----------------------------------------------------- */
 
+  // Collects every spelling of a value, so a name written { en, zh } matches
+  // whichever language the reader is not currently looking at.
+  function spellings(v) {
+    var out = [];
+    if (v && typeof v === "object" && !Array.isArray(v)) {
+      LANGS.forEach(function (l) { if (has(v[l])) out.push(String(v[l])); });
+    } else if (has(v)) {
+      out.push(String(v));
+    }
+    return out.map(function (x) { return x.replace(/\*+$/, "").trim().toLowerCase(); });
+  }
+
+  function isSelf(author) {
+    var mine = spellings(SELF);
+    return spellings(author).some(function (n) { return mine.indexOf(n) !== -1; });
+  }
+
+  // First author, or corresponding author as flagged in the data file. The
+  // first author can be read off the list; who corresponded cannot, so that
+  // one has to be stated.
+  function isLeadAuthor(p) {
+    if (p.corresponding === true) return true;
+    var first = list(p.authors)[0];
+    return first != null && isSelf(first);
+  }
+
   function authorsHtml(authors) {
-    var self = t(SELF);
     return list(authors).map(function (a) {
-      var clean = String(t(a)).replace(/\*+$/, "").trim();
-      var mine = self && clean.toLowerCase() === String(self).toLowerCase();
-      return mine ? '<span class="me">' + esc(clean) + "</span>" : esc(clean);
+      var shown = String(t(a)).replace(/\*+$/, "").trim();
+      return isSelf(a) ? '<span class="me">' + esc(shown) + "</span>" : esc(shown);
     }).join(lang === "zh" ? "、" : ", ");
   }
 
@@ -442,7 +466,7 @@
 
   // Filter state is kept outside the render so switching language does not
   // reset the chip the reader has chosen.
-  var pubState = { topic: "all" };
+  var pubState = { topic: "all", role: "all" };
 
   function renderPublications() {
     var el = mount("pub-list");
@@ -456,8 +480,14 @@
 
     function draw() {
       var items = pool.filter(function (p) {
-        if (pubState.topic === "all") return true;
-        return list(p.topic).map(String).indexOf(pubState.topic) !== -1;
+        if (pubState.topic !== "all"
+            && list(p.topic).map(String).indexOf(pubState.topic) === -1) return false;
+        if (pubState.role !== "all") {
+          var lead = isLeadAuthor(p);
+          if (pubState.role === "lead" && !lead) return false;
+          if (pubState.role === "co" && lead) return false;
+        }
+        return true;
       });
 
       if (!items.length) {
@@ -479,6 +509,8 @@
   // Only topics filter the list. The chips follow the order declared in
   // window.TOPICS; a topic with no publications is still shown, so the three
   // research directions always read as a complete set.
+  // Two rows of chips: topic, then the reader's own position in the author
+  // list. Both narrow the same list, so they combine.
   function buildToolbar(bar, pool, draw) {
     var known = TOPICS.map(function (x) { return String(x.id); });
 
@@ -490,31 +522,42 @@
       });
     });
 
-    function labelFor(id) {
+    function topicLabel(id) {
       var found = null;
       TOPICS.forEach(function (x) { if (String(x.id) === id) found = x; });
       return found ? t(found.label) : id;
     }
 
-    function chip(value, text) {
+    function chip(key, value, text) {
       return '<button class="chip" type="button" data-value="' + esc(value)
-        + '" aria-pressed="' + (pubState.topic === value) + '">' + esc(text) + "</button>";
+        + '" aria-pressed="' + (pubState[key] === value) + '">' + esc(text) + "</button>";
+    }
+
+    function row(key, chips) {
+      return '<div class="filters" data-key="' + key + '">' + chips.join("") + "</div>";
     }
 
     bar.className = "toolbar";
-    bar.innerHTML = '<div class="filters">'
-      + chip("all", tr("filter.allTopics"))
-      + known.map(function (id) { return chip(id, labelFor(id)); }).join("")
-      + "</div>";
+    bar.innerHTML =
+      row("topic", [chip("topic", "all", tr("filter.allTopics"))].concat(
+        known.map(function (id) { return chip("topic", id, topicLabel(id)); })
+      ))
+      + row("role", [
+          chip("role", "all", tr("filter.allRoles")),
+          chip("role", "lead", tr("filter.lead")),
+          chip("role", "co", tr("filter.coauthor"))
+        ]);
 
-    bar.querySelector(".filters").addEventListener("click", function (e) {
-      var btn = e.target.closest(".chip");
-      if (!btn) return;
-      bar.querySelectorAll(".chip").forEach(function (c) {
-        c.setAttribute("aria-pressed", String(c === btn));
+    bar.querySelectorAll(".filters").forEach(function (group) {
+      group.addEventListener("click", function (e) {
+        var btn = e.target.closest(".chip");
+        if (!btn) return;
+        group.querySelectorAll(".chip").forEach(function (c) {
+          c.setAttribute("aria-pressed", String(c === btn));
+        });
+        pubState[group.dataset.key] = btn.dataset.value;
+        draw();
       });
-      pubState.topic = btn.dataset.value;
-      draw();
     });
   }
 

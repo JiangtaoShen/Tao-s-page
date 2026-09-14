@@ -16,6 +16,9 @@
      note      short badge, e.g. { en: "Oral", zh: "口头报告" }
      topic     array of topic ids from window.TOPICS below, drives the filter
      thumb     optional teaser image, 4:3 works best
+     corresponding  true if you were a corresponding author on this paper.
+               First authorship is read off the authors array, so only this
+               one has to be stated. Together they drive the author filter.
      selected  true to also show it on the homepage
      links     any subset of pdf, arxiv, doi, code, demo, project, paper,
                data, video, slides, poster, doc, bibtex. Empty ones are

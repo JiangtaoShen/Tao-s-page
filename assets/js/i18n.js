@@ -27,6 +27,9 @@ window.I18N = {
     "contact.address":      "Address",
 
     "filter.allTopics":     "All topics",
+    "filter.allRoles":      "Any role",
+    "filter.lead":          "First or corresponding author",
+    "filter.coauthor":      "Co-author",
 
     "empty.pubs":           "No matching publications.",
     "empty.projects":       "Nothing here yet.",
@@ -57,6 +60,9 @@ window.I18N = {
     "contact.address":      "通讯地址",
 
     "filter.allTopics":     "全部主题",
+    "filter.allRoles":      "不限身份",
+    "filter.lead":          "第一作者或通讯作者",
+    "filter.coauthor":      "非第一非通讯",
 
     "empty.pubs":           "没有符合条件的论文。",
     "empty.projects":       "暂无内容。",

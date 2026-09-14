@@ -27,8 +27,14 @@ by GitHub Pages.
   is supplied for a bio, award or project description, leave the other absent;
   the renderer falls back to the language that exists.
 
-Publications are filtered by topic and by nothing else: no type chips, no
-search box. The topics are fixed to the three research directions and are
+Publications are filtered by two rows of chips and nothing else: topic, then
+the author position. No type chips, no search box. The two rows combine.
+
+Author position is derived, not stored twice. First authorship is read off the
+first entry of `authors` by `isLeadAuthor`, which compares against
+`AUTHOR_SELF` in either language, so it cannot drift from the author list.
+Being a corresponding author cannot be read off anything, so it is stated as
+`corresponding: true` on the publication. Lead means either one. The topics are fixed to the three research directions and are
 declared once in `window.TOPICS` in `data/publications.js`, each with a stable
 `id` and a bilingual `label`. A publication stores ids, never labels, so the
 chip text can change with the language while the filter keeps working. A chip
