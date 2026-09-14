@@ -766,3 +766,21 @@ main section { scroll-margin-top: 78px; }
 @media (prefers-reduced-motion: reduce) {
   .toc, .toc-backdrop { transition: none; }
 }
+
+/* The papers list opens short; this asks for the rest of it. */
+.show-more {
+  font: inherit;
+  font-size: var(--fs-sm);
+  color: var(--fg-muted);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 0.3rem 0.8rem;
+  margin-top: 1.1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.show-more:hover { color: var(--accent); border-color: var(--fg-faint); }
+.show-more svg { width: 15px; height: 15px; }

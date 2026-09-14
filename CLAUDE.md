@@ -37,6 +37,14 @@ vanishing.
 The papers section is filtered by rows of chips and nothing else, no search
 box: topic, author position, and journal against conference. They combine.
 
+The list opens showing `PUB_LIMIT` entries with a button for the rest, so the
+papers do not bury everything below them. The button disappears when a filter
+leaves fewer entries than the limit. Collapsing scrolls the section back into
+view, since it removes the ground the reader was standing on. A count inside a
+translated label goes through `trn`, which substitutes into the string rather
+than appending beside it, because the number falls in different places in the
+two languages.
+
 The books section hides itself while it is empty, instead of standing on the
 page announcing that it holds nothing, and the contents drawer skips hidden
 sections so it never offers a link to one.

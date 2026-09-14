@@ -36,6 +36,9 @@ window.I18N = {
     "kind.conference":      "Conference",
     "filter.lead":          "First or corresponding author",
 
+    "pub.more":             "Show {n} more",
+    "pub.less":             "Show fewer",
+
     "empty.pubs":           "No matching publications.",
     "empty.projects":       "Nothing here yet.",
     "empty.news":           "No news yet.",
@@ -73,6 +76,9 @@ window.I18N = {
     "kind.journal":         "期刊论文",
     "kind.conference":      "会议论文",
     "filter.lead":          "第一作者或通讯作者",
+
+    "pub.more":             "展开其余 {n} 篇",
+    "pub.less":             "收起",
 
     "empty.pubs":           "没有符合条件的论文。",
     "empty.projects":       "暂无内容。",

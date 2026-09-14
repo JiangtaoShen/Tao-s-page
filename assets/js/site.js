@@ -58,6 +58,12 @@
     return key;
   }
 
+  // An interface string with a number in it. The number sits in different
+  // places in each language, so it goes into the string rather than beside it.
+  function trn(key, n) {
+    return String(tr(key)).replace("{n}", String(n));
+  }
+
   // Content value: plain, or { en, zh }. Falls back to the other language
   // rather than rendering nothing, which matters while a site is half filled.
   function t(v) {
@@ -248,6 +254,8 @@
                + 'M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6'
                + 'M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>';
 
+  var ICON_DOWN = SVG + '<path d="m6 9.5 6 6 6-6"/></svg>';
+  var ICON_UP = SVG + '<path d="m6 14.5 6-6 6 6"/></svg>';
   var ICON_EXPAND = SVG + '<path d="M5 5.5v13"/><path d="m12 6.5 5.5 5.5-5.5 5.5"/></svg>';
   var ICON_COLLAPSE = SVG + '<path d="M5 5.5v13"/><path d="m17.5 6.5-5.5 5.5 5.5 5.5"/></svg>';
 
@@ -485,7 +493,10 @@
 
   // Filter state is kept outside the render so switching language does not
   // reset the chips the reader has chosen.
-  var pubState = { topic: "all", role: "all", subtype: "all" };
+  var pubState = { topic: "all", role: "all", subtype: "all", expanded: false };
+
+  // How many papers the list shows before the reader asks for the rest.
+  var PUB_LIMIT = 5;
 
   function renderPublications() {
     var el = mount("pub-list");
@@ -512,15 +523,49 @@
         el.innerHTML = '<p class="empty">' + esc(tr("empty.pubs")) + "</p>";
         return;
       }
+
+      items = items.slice().sort(function (a, b) { return (b.year || 0) - (a.year || 0); });
+
       if (selectedOnly) {
-        items = items.slice().sort(function (a, b) { return (b.year || 0) - (a.year || 0); });
         el.innerHTML = items.map(pubHtml).join("");
         return;
       }
-      el.innerHTML = groupByYear(items).map(function (g) {
+
+      // Sixteen entries is a wall of text to scroll past on the way to
+      // anything below, so the list opens short.
+      var total = items.length;
+      var shown = pubState.expanded ? items : items.slice(0, PUB_LIMIT);
+      var hidden = total - shown.length;
+
+      el.innerHTML = groupByYear(shown).map(function (g) {
         return '<div class="year-group"><p class="year-label">' + esc(g.year) + "</p>"
           + g.items.map(pubHtml).join("") + "</div>";
-      }).join("");
+      }).join("")
+        + (total > PUB_LIMIT
+            ? '<button class="show-more" type="button">'
+              + (pubState.expanded
+                  ? ICON_UP + "<span>" + esc(tr("pub.less")) + "</span>"
+                  : ICON_DOWN + "<span>" + esc(trn("pub.more", hidden)) + "</span>")
+              + "</button>"
+            : "");
+
+      var toggle = el.querySelector(".show-more");
+      if (toggle) {
+        toggle.addEventListener("click", function () {
+          var collapsing = pubState.expanded;
+          pubState.expanded = !pubState.expanded;
+          draw();
+          if (collapsing) {
+            // Collapsing removes everything below the fold, which would
+            // otherwise leave the reader stranded further down the page.
+            var section = el.closest("section");
+            if (section) section.scrollIntoView({ block: "start" });
+          } else {
+            var next = el.querySelector(".show-more");
+            if (next) next.focus({ preventScroll: true });
+          }
+        });
+      }
     }
   }
 
