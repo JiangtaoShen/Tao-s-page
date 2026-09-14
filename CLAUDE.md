@@ -43,7 +43,7 @@ drops the separator and silently corrupts the glyph.
 ## Visual direction
 
 Minimal academic: white ground, a single restrained blue accent, hairline rules,
-generous whitespace, narrow measure of 760px. Serif only for the name and page
+generous whitespace, a measure of 840px. Serif only for the name and page
 titles. No gradients, no drop shadows, no animation beyond a link underline.
 
 ## Rendering model

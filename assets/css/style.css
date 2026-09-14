@@ -21,7 +21,10 @@
                 "Noto Serif CJK SC", "Source Han Serif SC", SimSun, serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
-  --measure: 760px;
+  /* Wide enough that the longest affiliation line in the experience list stays
+     on one row. That line needs about 612px beside the 131px date column, so
+     anything under roughly 810px wraps it. */
+  --measure: 840px;
 }
 
 html[data-theme="dark"] {
