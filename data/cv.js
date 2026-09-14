@@ -36,13 +36,19 @@ window.CV = [
     heading: { en: "Experience", zh: "工作与实习" },
     items: [
       {
-        when: "TODO - TODO",
-        what: { en: "TODO: Research Intern", zh: "TODO: 研究实习生" },
-        where: { en: "TODO: Lab or Company", zh: "TODO: 某实验室或公司" },
+        when: { en: "TODO - present", zh: "TODO 至今" },
+        what: { en: "Postdoctoral Researcher", zh: "博士后研究员" },
+        where: { en: "Earlham Institute, Norwich, UK", zh: "Earlham Institute，英国诺里奇" },
         detail: {
-          en: "TODO: One line on what you worked on.",
-          zh: "TODO: 一句话说明你做了什么。"
+          en: "TODO: One line on what you work on, and the group or supervisor.",
+          zh: "TODO: 一句话说明你的研究内容，以及所在课题组或合作导师。"
         }
+      },
+      {
+        when: "TODO - TODO",
+        what: { en: "TODO: Earlier role", zh: "TODO: 此前的职位" },
+        where: { en: "TODO: Lab or Company", zh: "TODO: 某实验室或公司" },
+        detail: ""
       }
     ]
   },

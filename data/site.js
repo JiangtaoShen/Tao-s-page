@@ -17,32 +17,34 @@ window.SITE = {
     name: { en: "Jiangtao Shen", zh: "申江涛" },
 
     role: {
-      en: "TODO: PhD Candidate / Postdoc / Assistant Professor",
-      zh: "TODO: 博士研究生 / 博士后 / 助理教授"
+      en: "Postdoctoral Researcher",
+      zh: "博士后研究员"
     },
+    // Earlham Institute has no standard Chinese name, so the English form is
+    // kept in both languages. Replace the zh value if you prefer otherwise.
     affiliation: {
-      en: "TODO: Department, University",
-      zh: "TODO: 某某大学 某某学院"
+      en: "Earlham Institute",
+      zh: "Earlham Institute (EI)"
     },
     location: {
-      en: "TODO: City, Country",
-      zh: "TODO: 中国 某某市"
+      en: "Norwich, United Kingdom",
+      zh: "英国 诺里奇"
     },
 
     photo: "assets/img/avatar.svg",   // square, 400px or larger
-    email: "TODO@example.edu",        // also set the mailto: link below
+    email: "Jiangtao.Shen@earlham.ac.uk",
 
     // One paragraph per array item. The two languages may differ in length.
     bio: {
       en: [
-        "TODO: One or two sentences on who you are and where you work.",
+        "TODO: One or two sentences on what you work on at the Earlham Institute.",
         "TODO: Your research interests, stated so a non-specialist can follow. Mention the problems you care about rather than only the methods you use.",
-        "TODO: What you are looking for right now, for example collaborations, students, or a position."
+        "TODO: What you are looking for right now, for example collaborations or a next position."
       ],
       zh: [
-        "TODO: 一两句话介绍你是谁、在哪里工作。",
+        "TODO: 一两句话介绍你在 Earlham Institute 做什么。",
         "TODO: 你的研究兴趣，尽量让非同行也能读懂。侧重你关心的问题，而不只是你用的方法。",
-        "TODO: 你目前在寻找什么，例如合作、招生或职位。"
+        "TODO: 你目前在寻找什么，例如合作或下一份职位。"
       ]
     },
 
@@ -62,7 +64,7 @@ window.SITE = {
 
   // Anything with an empty url is skipped when rendering.
   links: [
-    { label: { en: "Email", zh: "邮箱" }, url: "mailto:TODO@example.edu" },
+    { label: { en: "Email", zh: "邮箱" }, url: "mailto:Jiangtao.Shen@earlham.ac.uk" },
     { label: "Google Scholar", url: "" },
     { label: "GitHub",         url: "https://github.com/JiangtaoShen" },
     { label: "ORCID",          url: "" },
