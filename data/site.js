@@ -11,10 +11,10 @@
 window.SITE = {
 
   // Shown in the header and appended to every page title.
-  brand: { en: "Jiangtao Shen", zh: "沈江涛" },
+  brand: { en: "Jiangtao Shen", zh: "申江涛" },
 
   profile: {
-    name: { en: "Jiangtao Shen", zh: "沈江涛" },
+    name: { en: "Jiangtao Shen", zh: "申江涛" },
 
     role: {
       en: "TODO: PhD Candidate / Postdoc / Assistant Professor",

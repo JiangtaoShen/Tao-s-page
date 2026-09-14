@@ -7,7 +7,7 @@
                languages, so a plain string is normal here. Use
                { en: "...", zh: "..." } if you do want a translated title.
      authors   required, array of names. A name may itself be bilingual:
-               { en: "Jiangtao Shen", zh: "沈江涛" }.
+               { en: "Jiangtao Shen", zh: "申江涛" }.
      venue     journal or conference name, no year
      year      number, required, used for grouping
      type      "journal" | "conference" | "preprint" | "thesis" | "patent"
@@ -20,13 +20,13 @@
    ========================================================================== */
 
 // Your own name, so it can be rendered bold in the author list.
-window.AUTHOR_SELF = { en: "Jiangtao Shen", zh: "沈江涛" };
+window.AUTHOR_SELF = { en: "Jiangtao Shen", zh: "申江涛" };
 
 window.PUBLICATIONS = [
   {
     title: "TODO: Title of your most recent paper",
     authors: [
-      { en: "Jiangtao Shen", zh: "沈江涛" },
+      { en: "Jiangtao Shen", zh: "申江涛" },
       "Coauthor A",
       "Coauthor B"
     ],
@@ -53,7 +53,7 @@ window.PUBLICATIONS = [
     title: "TODO: An earlier paper",
     authors: [
       "Coauthor A",
-      { en: "Jiangtao Shen", zh: "沈江涛" }
+      { en: "Jiangtao Shen", zh: "申江涛" }
     ],
     venue: "TODO: Journal Name",
     year: 2025,
