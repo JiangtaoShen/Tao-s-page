@@ -96,7 +96,7 @@ mount just the header and footer:
 
 | id             | renders                                            |
 |----------------|----------------------------------------------------|
-| `site-header`  | brand, nav, language toggle, theme toggle          |
+| `site-header`  | brand, language toggle, theme toggle                |
 | `hero`         | photo, name, role, contact links, bio              |
 | `interests`    | research interest bullets                          |
 | `news`         | news list, capped by `SITE.newsLimit`              |
@@ -108,6 +108,12 @@ mount just the header and footer:
 | `cv`           | the remaining CV sections, each with its own heading |
 | `site-footer`  | copyright and last-updated line                    |
 | `toc`          | the contents drawer, built from the rendered headings |
+| `toc-tab`      | the bookmark on the left edge that opens the drawer  |
+
+The drawer opens from a bookmark protruding from the left edge, not from a
+header button, and closes on an inward arrow that reads as retracting it into
+that edge. The bookmark slides away with the drawer, so the two read as one
+object in two states.
 
 The contents drawer is generated from the `.section-title` headings the page
 actually rendered, so it cannot drift from the sections and it follows the

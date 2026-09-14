@@ -245,7 +245,7 @@
                + 'M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>';
 
   var ICON_TOC = SVG + '<path d="M4 6.5h16M4 12h16M4 17.5h10"/></svg>';
-  var ICON_CLOSE = SVG + '<path d="m6 6 12 12M18 6 6 18"/></svg>';
+  var ICON_COLLAPSE = SVG + '<path d="M5 5.5v13"/><path d="m17.5 6.5-5.5 5.5 5.5 5.5"/></svg>';
 
   function isDark() {
     var set = document.documentElement.getAttribute("data-theme");
@@ -287,8 +287,6 @@
       + '<a class="brand" href="' + esc(BASE + "index.html") + '">'
       + esc(t(SITE.brand) || t(SITE.profile && SITE.profile.name) || "Home") + "</a>"
       + '<div class="controls">'
-      + '<button class="toc-toggle" type="button" aria-expanded="' + tocOpen
-      + '" aria-controls="toc" aria-label="' + esc(tr("toc.title")) + '">' + ICON_TOC + "</button>"
       + '<button class="lang-toggle" type="button" aria-label="' + esc(tr("lang.switchToLabel"))
       + '">' + esc(tr("lang.switchTo")) + "</button>"
       + '<button class="theme-toggle" type="button"></button>'
@@ -305,9 +303,6 @@
       setLang(lang === "en" ? "zh" : "en");
     });
 
-    el.querySelector(".toc-toggle").addEventListener("click", function () {
-      setToc(!tocOpen);
-    });
   }
 
   function renderFooter() {
@@ -700,7 +695,7 @@
   function setToc(open, restoreFocus) {
     tocOpen = !!open;
     document.documentElement.classList.toggle("toc-open", tocOpen);
-    var btn = document.querySelector(".toc-toggle");
+    var btn = mount("toc-tab");
     if (btn) btn.setAttribute("aria-expanded", String(tocOpen));
     var panel = mount("toc");
     if (tocOpen) {
@@ -731,7 +726,7 @@
       '<div class="toc-head">'
       + '<p class="toc-title">' + esc(tr("toc.title")) + "</p>"
       + '<button class="toc-close" type="button" aria-label="' + esc(tr("toc.close")) + '">'
-      + ICON_CLOSE + "</button>"
+      + ICON_COLLAPSE + "</button>"
       + "</div>"
       + '<nav><ul class="toc-list">'
       + entries.map(function (e) {
@@ -758,6 +753,20 @@
         if (history.replaceState) history.replaceState(null, "", href);
       });
     });
+
+    // The bookmark: the only way in, and the thing the drawer retracts into.
+    var tab = mount("toc-tab");
+    if (tab) {
+      tab.innerHTML = ICON_TOC;
+      tab.setAttribute("aria-label", tr("toc.title"));
+      tab.setAttribute("title", tr("toc.title"));
+      tab.setAttribute("aria-controls", "toc");
+      tab.setAttribute("aria-expanded", String(tocOpen));
+      if (!tab.dataset.wired) {
+        tab.dataset.wired = "1";
+        tab.addEventListener("click", function () { setToc(!tocOpen); });
+      }
+    }
 
     var backdrop = mount("toc-backdrop");
     if (backdrop && !backdrop.dataset.wired) {

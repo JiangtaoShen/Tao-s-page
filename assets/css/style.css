@@ -639,19 +639,47 @@ a:hover > .ico { opacity: 1; }
 /* Hidden until asked for. Built from the headings the page rendered, so it
    never disagrees with the sections it points at. */
 
-.toc-toggle {
-  background: none;
-  border: 1px solid var(--rule);
-  color: var(--fg-muted);
-  border-radius: 6px;
-  width: 30px; height: 30px;
+/* The bookmark: a tab protruding from the left edge, which the drawer
+   retracts into. It is the only control that opens the contents. */
+.toc-tab {
+  position: fixed;
+  inset-inline-start: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 25;
+  width: 30px;
+  height: 78px;
+  padding: 0;
   cursor: pointer;
-  display: inline-flex;
+  background: var(--bg);
+  color: var(--fg-muted);
+  border: 1px solid var(--rule);
+  border-inline-start: 0;
+  border-radius: 0 9px 9px 0;
+  display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform .22s ease, opacity .18s ease, color .15s ease;
 }
-.toc-toggle:hover { color: var(--fg); border-color: var(--fg-faint); }
-.toc-toggle svg { width: 15px; height: 15px; display: block; }
+
+.toc-tab:hover {
+  color: var(--accent);
+  border-color: var(--fg-faint);
+}
+
+.toc-tab svg { width: 16px; height: 16px; display: block; }
+
+/* While the drawer is out, the bookmark is part of it, so it slides away. */
+html.toc-open .toc-tab {
+  transform: translateY(-50%) translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toc-tab { transition: none; }
+}
+
 
 .toc {
   position: fixed;
@@ -691,13 +719,14 @@ html.toc-open .toc { visibility: visible; transform: none; }
 
 .toc-close {
   background: none;
-  border: 0;
-  color: var(--fg-faint);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--fg-muted);
   cursor: pointer;
-  padding: 2px;
+  padding: 3px;
   display: inline-flex;
 }
-.toc-close:hover { color: var(--fg); }
+.toc-close:hover { color: var(--accent); border-color: var(--rule); }
 .toc-close svg { width: 15px; height: 15px; display: block; }
 
 .toc-list { list-style: none; margin: 0; padding: 0; }
