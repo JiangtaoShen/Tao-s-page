@@ -29,17 +29,17 @@ by GitHub Pages.
   is supplied for a bio, award or project description, leave the other absent;
   the renderer falls back to the language that exists.
 
-Publications are filtered by rows of chips and nothing else, no search box:
-topic, author position, publication kind, and, when the kind is papers, the
-kind of paper. All of them combine.
+Books and papers are separate sections of equal standing, both fed from
+`window.PUBLICATIONS`. A `type` in `BOOK_TYPES` lands in the books section;
+anything else is a paper, so an unfamiliar type surfaces rather than
+vanishing.
 
-The kind hierarchy is declared in `KINDS` in `site.js`: structure there,
-wording in `i18n.js`, because what a publication is counts as interface
-vocabulary rather than the user content `TOPICS` holds. Each kind lists the
-`type` values that belong to it, so a new type joins a kind by being added to
-that list. The subtype row is always in the DOM and merely hidden, so choosing
-a kind never rebuilds the toolbar and never pulls focus off the chip just
-clicked.
+The papers section is filtered by rows of chips and nothing else, no search
+box: topic, author position, and journal against conference. They combine.
+
+The books section hides itself while it is empty, instead of standing on the
+page announcing that it holds nothing, and the contents drawer skips hidden
+sections so it never offers a link to one.
 
 Author position is derived, not stored twice. First authorship is read off the
 first entry of `authors` by `isLeadAuthor`, which compares against

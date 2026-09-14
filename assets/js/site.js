@@ -202,7 +202,11 @@
       + '<path d="M17.6 9.4a3.6 3.6 0 0 1 0 5.2"/>'
       + '<path d="M7.6 15.4v2.4a1.8 1.8 0 0 0 1.8 1.8h.6"/>'),
 
-    publications: strokeIcon('<path d="M3.4 5.2h4.8a3.8 3.8 0 0 1 3.8 3.8v10.6'
+    publications: strokeIcon('<path d="M6 3.4h8.4L19 8v12.6H6Z"/>'
+      + '<path d="M14.2 3.4V8H19"/>'
+      + '<path d="M9 12.4h7M9 15.8h4.6"/>'),
+
+    books: strokeIcon('<path d="M3.4 5.2h4.8a3.8 3.8 0 0 1 3.8 3.8v10.6'
       + 'a2.8 2.8 0 0 0-2.8-2.8H3.4Z"/>'
       + '<path d="M20.6 5.2h-4.8a3.8 3.8 0 0 0-3.8 3.8v10.6a2.8 2.8 0 0 1 2.8-2.8h5.8Z"/>'),
 
@@ -468,38 +472,27 @@
       .map(function (y) { return { year: y, items: years[y] }; });
   }
 
-  // What a publication is, as opposed to what it is about. The structure lives
-  // here because it is interface vocabulary, not the user's content; the words
-  // come from assets/js/i18n.js. `types` lists the values a publication's
-  // `type` field may hold to count as this kind.
-  var KINDS = [
-    { id: "book", key: "kind.book", types: ["book", "chapter", "monograph"] },
-    {
-      id: "paper",
-      key: "kind.paper",
-      types: ["journal", "conference", "preprint"],
-      subtypes: [
-        { id: "journal", key: "kind.journal" },
-        { id: "conference", key: "kind.conference" }
-      ]
-    }
+  // Books have their own section, so a publication belongs to one list or the
+  // other by its `type`. Anything not recognised as a book is treated as a
+  // paper, so an unfamiliar type shows up rather than vanishing.
+  var BOOK_TYPES = ["book", "chapter", "monograph"];
+  var PAPER_SUBTYPES = [
+    { id: "journal", key: "kind.journal" },
+    { id: "conference", key: "kind.conference" }
   ];
 
-  function kindById(id) {
-    var found = null;
-    KINDS.forEach(function (k) { if (k.id === id) found = k; });
-    return found;
-  }
+  function isBook(p) { return BOOK_TYPES.indexOf(String(p.type)) !== -1; }
 
   // Filter state is kept outside the render so switching language does not
   // reset the chips the reader has chosen.
-  var pubState = { topic: "all", role: "all", kind: "all", subtype: "all" };
+  var pubState = { topic: "all", role: "all", subtype: "all" };
 
   function renderPublications() {
     var el = mount("pub-list");
     if (!el) return;
     var selectedOnly = el.dataset.selected === "true";
-    var pool = selectedOnly ? PUBS.filter(function (p) { return p.selected; }) : PUBS;
+    var papers = PUBS.filter(function (p) { return !isBook(p); });
+    var pool = selectedOnly ? papers.filter(function (p) { return p.selected; }) : papers;
 
     var bar = mount("pub-toolbar");
     if (bar) buildToolbar(bar, pool, draw);
@@ -511,11 +504,7 @@
             && list(p.topic).map(String).indexOf(pubState.topic) === -1) return false;
         if (pubState.role === "lead" && !isLeadAuthor(p)) return false;
 
-        if (pubState.kind !== "all") {
-          var kind = kindById(pubState.kind);
-          if (!kind || kind.types.indexOf(String(p.type)) === -1) return false;
-          if (pubState.subtype !== "all" && String(p.type) !== pubState.subtype) return false;
-        }
+        if (pubState.subtype !== "all" && String(p.type) !== pubState.subtype) return false;
         return true;
       });
 
@@ -538,10 +527,8 @@
   // Only topics filter the list. The chips follow the order declared in
   // window.TOPICS; a topic with no publications is still shown, so the three
   // research directions always read as a complete set.
-  // Rows of chips: topic, author position, publication kind, and the kind's
-  // subtypes. They all narrow the same list, so they combine. The subtype row
-  // is always in the DOM and merely hidden, so choosing a kind never rebuilds
-  // the toolbar and never takes focus off the chip just clicked.
+  // Three rows of chips: topic, author position, and the kind of paper. They
+  // all narrow the same list, so they combine.
   function buildToolbar(bar, pool, draw) {
     var known = TOPICS.map(function (x) { return String(x.id); });
 
@@ -564,14 +551,9 @@
         + '" aria-pressed="' + (pubState[key] === value) + '">' + esc(text) + "</button>";
     }
 
-    function row(key, chips, hidden) {
-      return '<div class="filters" data-key="' + key + '"' + (hidden ? " hidden" : "")
-        + ">" + chips.join("") + "</div>";
+    function row(key, chips) {
+      return '<div class="filters" data-key="' + key + '">' + chips.join("") + "</div>";
     }
-
-    // Only one kind declares subtypes today, and the row belongs to it.
-    var nested = null;
-    KINDS.forEach(function (k) { if (k.subtypes && !nested) nested = k; });
 
     bar.className = "toolbar";
     bar.innerHTML =
@@ -582,30 +564,9 @@
           chip("role", "all", tr("filter.allRoles")),
           chip("role", "lead", tr("filter.lead"))
         ])
-      + row("kind", [chip("kind", "all", tr("filter.allKinds"))].concat(
-          KINDS.map(function (k) { return chip("kind", k.id, tr(k.key)); })
-        ))
-      + (nested
-          ? row("subtype",
-              [chip("subtype", "all", tr("filter.allSubtypes"))].concat(
-                nested.subtypes.map(function (x) { return chip("subtype", x.id, tr(x.key)); })
-              ),
-              pubState.kind !== nested.id)
-          : "");
-
-    var subtypeRow = bar.querySelector('.filters[data-key="subtype"]');
-
-    function syncSubtypeRow() {
-      if (!subtypeRow || !nested) return;
-      var show = pubState.kind === nested.id;
-      subtypeRow.hidden = !show;
-      if (!show && pubState.subtype !== "all") {
-        pubState.subtype = "all";
-        subtypeRow.querySelectorAll(".chip").forEach(function (c) {
-          c.setAttribute("aria-pressed", String(c.dataset.value === "all"));
-        });
-      }
-    }
+      + row("subtype", [chip("subtype", "all", tr("filter.allSubtypes"))].concat(
+          PAPER_SUBTYPES.map(function (x) { return chip("subtype", x.id, tr(x.key)); })
+        ));
 
     bar.querySelectorAll(".filters").forEach(function (group) {
       group.addEventListener("click", function (e) {
@@ -615,12 +576,22 @@
           c.setAttribute("aria-pressed", String(c === btn));
         });
         pubState[group.dataset.key] = btn.dataset.value;
-        if (group.dataset.key === "kind") syncSubtypeRow();
         draw();
       });
     });
+  }
 
-    syncSubtypeRow();
+  // Books, listed the same way as papers but without filters: there are never
+  // enough of them to need narrowing. The section hides itself while empty,
+  // rather than standing on the page saying it has nothing in it.
+  function renderBooks() {
+    var el = mount("book-list");
+    if (!el) return;
+    var books = PUBS.filter(isBook).slice()
+      .sort(function (a, b) { return (b.year || 0) - (a.year || 0); });
+    var section = el.closest("section");
+    if (section) section.hidden = books.length === 0;
+    el.innerHTML = books.map(pubHtml).join("");
   }
 
   /* --- projects --------------------------------------------------------- */
@@ -776,7 +747,9 @@
     var entries = [];
     document.querySelectorAll("main .section-title").forEach(function (h, i) {
       var sec = h.closest("section");
-      if (!sec) return;
+      // A section that hides itself while empty, such as books before there are
+      // any, must not leave an entry pointing at nothing.
+      if (!sec || sec.hidden) return;
       if (!sec.id) sec.id = "section-" + i;
       entries.push({
         id: sec.id,
@@ -876,6 +849,7 @@
     renderNews();
     renderContact();
     renderPublications();
+    renderBooks();
     renderProjects();
     renderCV();
     renderFooter();

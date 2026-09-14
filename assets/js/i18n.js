@@ -22,6 +22,7 @@ window.I18N = {
     "section.interests":    "Research interests",
     "section.news":         "News",
     "section.publications": "Publications",
+    "section.books":        "Books",
     "section.projects":     "Projects",
     "section.contact":      "Contact",
 
@@ -30,10 +31,7 @@ window.I18N = {
 
     "filter.allTopics":     "All topics",
     "filter.allRoles":      "Any role",
-    "filter.allKinds":      "All kinds",
     "filter.allSubtypes":   "All papers",
-    "kind.book":            "Books",
-    "kind.paper":           "Papers",
     "kind.journal":         "Journal",
     "kind.conference":      "Conference",
     "filter.lead":          "First or corresponding author",
@@ -62,6 +60,7 @@ window.I18N = {
     "section.interests":    "研究方向",
     "section.news":         "最新动态",
     "section.publications": "论文发表",
+    "section.books":        "专著",
     "section.projects":     "项目成果",
     "section.contact":      "联系方式",
 
@@ -70,10 +69,7 @@ window.I18N = {
 
     "filter.allTopics":     "全部主题",
     "filter.allRoles":      "不限身份",
-    "filter.allKinds":      "全部类型",
     "filter.allSubtypes":   "全部论文",
-    "kind.book":            "专著",
-    "kind.paper":           "论文",
     "kind.journal":         "期刊论文",
     "kind.conference":      "会议论文",
     "filter.lead":          "第一作者或通讯作者",
