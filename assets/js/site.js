@@ -3,7 +3,7 @@
 
    Pages declare what they want by placing an element with a known id:
      #site-header  #site-footer  #hero  #news  #interests
-     #pub-list (+ optional #pub-toolbar)  #project-list  #cv
+     #pub-list (+ optional #pub-toolbar)  #project-list  #cv  #contact
    Anything absent is simply skipped, so one script serves all pages.
 
    Static markup is translated through attributes:
@@ -26,6 +26,7 @@
   var PUBS = window.PUBLICATIONS || [];
   var PROJECTS = window.PROJECTS || [];
   var CV = window.CV || [];
+  var TOPICS = window.TOPICS || [];
   var DICT = window.I18N || { en: {}, zh: {} };
   var SELF = window.AUTHOR_SELF || {};
 
@@ -224,39 +225,22 @@
 
   /* --- header and footer ------------------------------------------------ */
 
-  var NAV = [
-    { href: "index.html",        key: "nav.about" },
-    { href: "publications.html", key: "nav.publications" },
-    { href: "projects.html",     key: "nav.projects" },
-    { href: "cv.html",           key: "nav.cv" }
-  ];
-
-  function currentPage() {
-    var p = location.pathname.split("/").pop();
-    return p === "" ? "index.html" : p;
-  }
-
+  // The site is a single page, so the header carries no navigation: just the
+  // name and the two toggles.
   function renderHeader() {
     var el = mount("site-header");
     if (!el) return;
-    var here = currentPage();
-    var inSub = BASE !== "";
-    var nav = NAV.map(function (n) {
-      var active = !inSub && n.href === here;
-      return '<a href="' + esc(BASE + n.href) + '"'
-             + (active ? ' aria-current="page"' : "") + ">" + esc(tr(n.key)) + "</a>";
-    }).join("");
 
     el.className = "site-header";
     el.innerHTML =
       '<div class="wrap">'
       + '<a class="brand" href="' + esc(BASE + "index.html") + '">'
       + esc(t(SITE.brand) || t(SITE.profile && SITE.profile.name) || "Home") + "</a>"
-      + '<nav class="nav">' + nav
+      + '<div class="controls">'
       + '<button class="lang-toggle" type="button" aria-label="' + esc(tr("lang.switchToLabel"))
       + '">' + esc(tr("lang.switchTo")) + "</button>"
       + '<button class="theme-toggle" type="button"></button>'
-      + "</nav></div>";
+      + "</div></div>";
 
     var themeBtn = el.querySelector(".theme-toggle");
     paintTheme(themeBtn);
@@ -410,8 +394,8 @@
   }
 
   // Filter state is kept outside the render so switching language does not
-  // reset the chips the reader has chosen.
-  var pubState = { type: "all", topic: "all", q: "" };
+  // reset the chip the reader has chosen.
+  var pubState = { topic: "all" };
 
   function renderPublications() {
     var el = mount("pub-list");
@@ -425,15 +409,8 @@
 
     function draw() {
       var items = pool.filter(function (p) {
-        if (pubState.type !== "all" && p.type !== pubState.type) return false;
-        if (pubState.topic !== "all"
-            && list(p.topic).map(String).indexOf(pubState.topic) === -1) return false;
-        if (pubState.q) {
-          var hay = [t(p.title), t(p.venue), authorsPlain(p.authors), list(p.topic).join(" ")]
-            .join(" ").toLowerCase();
-          if (hay.indexOf(pubState.q) === -1) return false;
-        }
-        return true;
+        if (pubState.topic === "all") return true;
+        return list(p.topic).map(String).indexOf(pubState.topic) !== -1;
       });
 
       if (!items.length) {
@@ -452,68 +429,44 @@
     }
   }
 
-  // Searching should match a name in either language.
-  function authorsPlain(authors) {
-    return list(authors).map(function (a) {
-      if (a && typeof a === "object") {
-        return LANGS.map(function (l) { return a[l] || ""; }).join(" ");
-      }
-      return String(a);
-    }).join(" ");
-  }
-
+  // Only topics filter the list. The chips follow the order declared in
+  // window.TOPICS; a topic with no publications is still shown, so the three
+  // research directions always read as a complete set.
   function buildToolbar(bar, pool, draw) {
-    var types = [];
-    var topics = [];
+    var known = TOPICS.map(function (x) { return String(x.id); });
+
+    // Anything tagged with an id that is not registered still gets a chip,
+    // rather than becoming unreachable.
     pool.forEach(function (p) {
-      if (has(p.type) && types.indexOf(p.type) === -1) types.push(p.type);
       list(p.topic).forEach(function (x) {
-        if (topics.indexOf(String(x)) === -1) topics.push(String(x));
+        if (known.indexOf(String(x)) === -1) known.push(String(x));
       });
     });
 
-    function typeLabel(v) {
-      var key = "type." + v;
-      var label = tr(key);
-      return label === key ? v.charAt(0).toUpperCase() + v.slice(1) : label;
+    function labelFor(id) {
+      var found = null;
+      TOPICS.forEach(function (x) { if (String(x.id) === id) found = x; });
+      return found ? t(found.label) : id;
     }
 
-    function chips(values, key, allLabel, label) {
-      return '<div class="filters" data-key="' + key + '">'
-        + '<button class="chip" type="button" data-value="all" aria-pressed="'
-        + (pubState[key] === "all") + '">' + esc(allLabel) + "</button>"
-        + values.map(function (v) {
-            return '<button class="chip" type="button" data-value="' + esc(v)
-              + '" aria-pressed="' + (pubState[key] === v) + '">'
-              + esc(label(v)) + "</button>";
-          }).join("")
-        + "</div>";
+    function chip(value, text) {
+      return '<button class="chip" type="button" data-value="' + esc(value)
+        + '" aria-pressed="' + (pubState.topic === value) + '">' + esc(text) + "</button>";
     }
 
     bar.className = "toolbar";
-    bar.innerHTML = chips(types, "type", tr("filter.all"), typeLabel)
-      + (topics.length
-          ? chips(topics, "topic", tr("filter.allTopics"), function (v) { return v; })
-          : "")
-      + '<input class="search" type="search" placeholder="' + esc(tr("filter.search"))
-      + '" aria-label="' + esc(tr("filter.searchLabel")) + '" value="'
-      + esc(pubState.q) + '">';
+    bar.innerHTML = '<div class="filters">'
+      + chip("all", tr("filter.allTopics"))
+      + known.map(function (id) { return chip(id, labelFor(id)); }).join("")
+      + "</div>";
 
-    bar.querySelectorAll(".filters").forEach(function (row) {
-      row.addEventListener("click", function (e) {
-        var btn = e.target.closest(".chip");
-        if (!btn) return;
-        row.querySelectorAll(".chip").forEach(function (c) {
-          c.setAttribute("aria-pressed", String(c === btn));
-        });
-        pubState[row.dataset.key] = btn.dataset.value;
-        draw();
+    bar.querySelector(".filters").addEventListener("click", function (e) {
+      var btn = e.target.closest(".chip");
+      if (!btn) return;
+      bar.querySelectorAll(".chip").forEach(function (c) {
+        c.setAttribute("aria-pressed", String(c === btn));
       });
-    });
-
-    var input = bar.querySelector(".search");
-    input.addEventListener("input", function () {
-      pubState.q = input.value.trim().toLowerCase();
+      pubState.topic = btn.dataset.value;
       draw();
     });
   }

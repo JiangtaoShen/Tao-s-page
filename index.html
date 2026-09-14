@@ -37,16 +37,19 @@
   </section>
 
   <section>
-    <h2 class="section-title" data-i18n="section.selectedPubs">Selected Publications</h2>
-    <div id="pub-list" data-selected="true"></div>
-    <p class="more"><a href="publications.html" data-i18n="link.allPubs">All publications &rarr;</a></p>
+    <h2 class="section-title" data-i18n="section.publications">Publications</h2>
+    <div id="pub-toolbar"></div>
+    <div id="pub-list"></div>
   </section>
 
   <section>
-    <h2 class="section-title" data-i18n="section.featured">Featured Projects</h2>
-    <div id="project-list" data-featured="true"></div>
-    <p class="more"><a href="projects.html" data-i18n="link.allProjects">All projects &rarr;</a></p>
+    <h2 class="section-title" data-i18n="section.projects">Projects</h2>
+    <div id="project-list"></div>
   </section>
+
+  <!-- Education, experience, awards and the rest, straight from data/cv.js.
+       Each one renders its own section heading. -->
+  <div id="cv"></div>
 
   <section>
     <h2 class="section-title" data-i18n="section.contact">Contact</h2>
@@ -60,6 +63,7 @@
 <script src="data/site.js"></script>
 <script src="data/publications.js"></script>
 <script src="data/projects.js"></script>
+<script src="data/cv.js"></script>
 <script src="assets/js/i18n.js"></script>
 <script src="assets/js/site.js"></script>
 </body>

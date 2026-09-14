@@ -1,7 +1,7 @@
 /* ==========================================================================
    Interface strings.
 
-   This file holds chrome only: navigation, section headings, button labels.
+   This file holds chrome only: section headings, button labels, empty states.
    Content lives in data/*.js, where any field may be written either as a
    plain string (same in both languages) or as { en: "...", zh: "..." }.
 
@@ -17,40 +17,16 @@ window.I18N = {
     "theme.toDark":         "Switch to dark theme",
     "theme.toLight":        "Switch to light theme",
 
-    "nav.about":            "About",
-    "nav.publications":     "Publications",
-    "nav.projects":         "Projects",
-    "nav.cv":               "CV",
-
     "section.interests":    "Research Interests",
     "section.news":         "News",
-    "section.selectedPubs": "Selected Publications",
-    "section.featured":     "Featured Projects",
+    "section.publications": "Publications",
+    "section.projects":     "Projects",
     "section.contact":      "Contact",
+
     "contact.email":        "Email",
     "contact.address":      "Address",
 
-    "link.allPubs":         "All publications →",
-    "link.allProjects":     "All projects →",
-    "link.backProjects":    "← All projects",
-
-    "page.pubTitle":        "Publications",
-    "page.pubLede":         "Grouped by year. Use the filters to narrow by type or topic.",
-    "page.projTitle":       "Projects",
-    "page.projLede":        "Code, datasets and interactive demos.",
-    "page.cvTitle":         "Curriculum Vitae",
-    "page.cvLede":          "A PDF version is available <a href=\"assets/pdf/cv.pdf\">here</a>.",
-
-    "filter.all":           "All",
     "filter.allTopics":     "All topics",
-    "filter.search":        "Search title, author, venue",
-    "filter.searchLabel":   "Search publications",
-
-    "type.journal":         "Journal",
-    "type.conference":      "Conference",
-    "type.preprint":        "Preprint",
-    "type.thesis":          "Thesis",
-    "type.patent":          "Patent",
 
     "empty.pubs":           "No matching publications.",
     "empty.projects":       "Nothing here yet.",
@@ -58,10 +34,10 @@ window.I18N = {
 
     "footer.updated":       "Last updated",
 
-    "title.about":          "About",
-    "title.publications":   "Publications",
-    "title.projects":       "Projects",
-    "title.cv":             "Curriculum Vitae",
+    "title.about":          "Academic Homepage",
+
+    // Used only by the per-project detail pages under projects/.
+    "link.backProjects":    "← Back to the homepage",
     "title.project":        "Project"
   },
 
@@ -71,40 +47,16 @@ window.I18N = {
     "theme.toDark":         "切换到深色主题",
     "theme.toLight":        "切换到浅色主题",
 
-    "nav.about":            "个人简介",
-    "nav.publications":     "论文发表",
-    "nav.projects":         "项目成果",
-    "nav.cv":               "简历",
-
     "section.interests":    "研究方向",
     "section.news":         "最新动态",
-    "section.selectedPubs": "代表性论文",
-    "section.featured":     "代表性项目",
+    "section.publications": "论文发表",
+    "section.projects":     "项目成果",
     "section.contact":      "联系方式",
+
     "contact.email":        "邮箱",
     "contact.address":      "通讯地址",
 
-    "link.allPubs":         "全部论文 →",
-    "link.allProjects":     "全部项目 →",
-    "link.backProjects":    "← 返回项目列表",
-
-    "page.pubTitle":        "论文发表",
-    "page.pubLede":         "按年份分组，可按类型或主题筛选。",
-    "page.projTitle":       "项目成果",
-    "page.projLede":        "代码、数据集与可交互演示。",
-    "page.cvTitle":         "个人简历",
-    "page.cvLede":          "PDF 版本请见<a href=\"assets/pdf/cv.pdf\">此处</a>。",
-
-    "filter.all":           "全部",
     "filter.allTopics":     "全部主题",
-    "filter.search":        "搜索标题、作者、期刊",
-    "filter.searchLabel":   "搜索论文",
-
-    "type.journal":         "期刊论文",
-    "type.conference":      "会议论文",
-    "type.preprint":        "预印本",
-    "type.thesis":          "学位论文",
-    "type.patent":          "专利",
 
     "empty.pubs":           "没有符合条件的论文。",
     "empty.projects":       "暂无内容。",
@@ -113,9 +65,9 @@ window.I18N = {
     "footer.updated":       "最后更新于",
 
     "title.about":          "个人主页",
-    "title.publications":   "论文发表",
-    "title.projects":       "项目成果",
-    "title.cv":             "个人简历",
+
+    // 仅用于 projects/ 下的项目详情页
+    "link.backProjects":    "← 返回主页",
     "title.project":        "项目"
   }
 

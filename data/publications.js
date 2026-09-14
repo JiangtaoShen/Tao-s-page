@@ -14,15 +14,22 @@
      type      "journal" | "conference" | "preprint" | "thesis" | "patent"
                The filter chip label comes from assets/js/i18n.js.
      note      short badge, e.g. { en: "Oral", zh: "口头报告" }
-     topic     optional array of tags, drives the topic filter. Keep these in
-               one language: the chip value is also the filter key, so a
-               translated tag would break the filter on a language switch.
+     topic     array of topic ids from window.TOPICS below, drives the filter
      thumb     optional teaser image, 4:3 works best
      selected  true to also show it on the homepage
      links     any subset of pdf, arxiv, doi, code, demo, project, paper,
                data, video, slides, poster, doc, bibtex. Empty ones are
                skipped, missing ones simply do not render.
    ========================================================================== */
+
+// The three topics, in the order the filter chips appear. The id is the key
+// stored on each publication and never shown; the label is what the reader sees,
+// so it can differ per language without breaking the filter.
+window.TOPICS = [
+  { id: "optimization", label: { en: "Optimization",   zh: "优化" } },
+  { id: "pinn",         label: { en: "PINN",           zh: "PINN" } },
+  { id: "agentic",      label: { en: "Agentic system", zh: "Agentic system" } }
+];
 
 // Your own name, so it can be rendered bold in the author list.
 window.AUTHOR_SELF = { en: "Jiangtao Shen", zh: "申江涛" };
@@ -35,7 +42,7 @@ window.PUBLICATIONS = [
     venue: "IEEE Transactions on Evolutionary Computation",
     year: 2026,
     type: "journal",
-    topic: ["Multi-objective"],
+    topic: ["optimization"],
     links: { doi: "https://doi.org/10.1109/TEVC.2026.3678952" }
   },
 
@@ -45,7 +52,7 @@ window.PUBLICATIONS = [
     venue: "IEEE Transactions on Evolutionary Computation",
     year: 2026,
     type: "journal",
-    topic: ["Multi-objective", "Expensive optimization"],
+    topic: ["optimization"],
     selected: true,
     links: { doi: "https://doi.org/10.1109/TEVC.2025.3583302" }
   },
@@ -56,7 +63,7 @@ window.PUBLICATIONS = [
     venue: "Applied Soft Computing",
     year: 2026,
     type: "journal",
-    topic: ["Glider design", "Expensive optimization"],
+    topic: ["optimization"],
     links: { doi: "https://doi.org/10.1016/j.asoc.2026.114867" }
   },
 
@@ -66,7 +73,7 @@ window.PUBLICATIONS = [
     venue: "Expert Systems with Applications",
     year: 2024,
     type: "journal",
-    topic: ["Surrogate-assisted", "Multi-objective"],
+    topic: ["optimization"],
     selected: true,
     links: { doi: "https://doi.org/10.1016/j.eswa.2023.122575" }
   },
@@ -77,7 +84,7 @@ window.PUBLICATIONS = [
     venue: "Ships and Offshore Structures",
     year: 2024,
     type: "journal",
-    topic: ["Glider design"],
+    topic: ["optimization"],
     links: { doi: "https://doi.org/10.1080/17445302.2023.2181494" }
   },
 
@@ -87,7 +94,7 @@ window.PUBLICATIONS = [
     venue: "Applied Soft Computing",
     year: 2023,
     type: "journal",
-    topic: ["Surrogate-assisted", "Expensive optimization"],
+    topic: ["optimization"],
     links: { doi: "https://doi.org/10.1016/j.asoc.2023.110879" }
   },
 
@@ -97,7 +104,7 @@ window.PUBLICATIONS = [
     venue: "Ships and Offshore Structures",
     year: 2023,
     type: "journal",
-    topic: ["Glider design"],
+    topic: ["optimization"],
     links: { doi: "https://doi.org/10.1080/17445302.2022.2126126" }
   },
 
@@ -107,7 +114,7 @@ window.PUBLICATIONS = [
     venue: "Expert Systems with Applications",
     year: 2023,
     type: "journal",
-    topic: ["Multi-objective"],
+    topic: ["optimization"],
     links: { doi: "https://doi.org/10.1016/j.eswa.2023.120198" }
   },
 
@@ -117,7 +124,7 @@ window.PUBLICATIONS = [
     venue: "Complex & Intelligent Systems",
     year: 2023,
     type: "journal",
-    topic: ["Surrogate-assisted", "Expensive optimization"],
+    topic: ["optimization"],
     links: { doi: "https://doi.org/10.1007/s40747-023-00969-w" }
   },
 
@@ -127,7 +134,7 @@ window.PUBLICATIONS = [
     venue: "IEEE Congress on Evolutionary Computation (CEC)",
     year: 2023,
     type: "conference",
-    topic: ["Many-objective", "Expensive optimization"],
+    topic: ["optimization"],
     links: { doi: "https://doi.org/10.1109/CEC53210.2023.10254133" }
   },
 
@@ -137,7 +144,7 @@ window.PUBLICATIONS = [
     venue: "Swarm and Evolutionary Computation",
     year: 2022,
     type: "journal",
-    topic: ["Surrogate-assisted", "Expensive optimization"],
+    topic: ["optimization"],
     links: { doi: "https://doi.org/10.1016/j.swevo.2022.101107" }
   },
 
@@ -147,7 +154,7 @@ window.PUBLICATIONS = [
     venue: "Applied Soft Computing",
     year: 2022,
     type: "journal",
-    topic: ["Surrogate-assisted", "Expensive optimization"],
+    topic: ["optimization"],
     links: { doi: "https://doi.org/10.1016/j.asoc.2022.108798" }
   },
 
@@ -157,7 +164,7 @@ window.PUBLICATIONS = [
     venue: "IEEE Transactions on Cybernetics",
     year: 2022,
     type: "journal",
-    topic: ["Many-objective"],
+    topic: ["optimization"],
     selected: true,
     links: { doi: "https://doi.org/10.1109/TCYB.2020.3015998" }
   },
@@ -168,7 +175,7 @@ window.PUBLICATIONS = [
     venue: "Knowledge-Based Systems",
     year: 2022,
     type: "journal",
-    topic: ["Surrogate-assisted", "Expensive optimization"],
+    topic: ["optimization"],
     links: { doi: "https://doi.org/10.1016/j.knosys.2022.108416" }
   },
 
@@ -179,7 +186,7 @@ window.PUBLICATIONS = [
     venue: "Information Sciences",
     year: 2022,
     type: "journal",
-    topic: ["Many-objective"],
+    topic: ["optimization"],
     links: { doi: "https://doi.org/10.1016/j.ins.2021.12.096" }
   },
 
@@ -190,7 +197,7 @@ window.PUBLICATIONS = [
     venue: "IEEE Congress on Evolutionary Computation (CEC)",
     year: 2020,
     type: "conference",
-    topic: ["Many-objective", "Surrogate-assisted"],
+    topic: ["optimization"],
     links: { doi: "https://doi.org/10.1109/CEC48606.2020.9185610" }
   }
 

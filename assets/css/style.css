@@ -88,7 +88,7 @@ img { max-width: 100%; height: auto; }
 
 code { font-family: var(--font-mono); font-size: 0.9em; }
 
-/* --- header / nav ------------------------------------------------------- */
+/* --- header ------------------------------------------------------------- */
 
 .site-header {
   border-bottom: 1px solid var(--rule);
@@ -117,23 +117,12 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 }
 .brand:hover { color: var(--accent); }
 
-.nav {
+/* The site is one page, so the header holds only the language and theme
+   toggles. */
+.controls {
   display: flex;
   align-items: center;
-  gap: 1.15rem;
-  flex-wrap: wrap;
-}
-
-.nav a {
-  color: var(--fg-muted);
-  font-size: 0.93rem;
-  border: 0;
-  padding-block: 2px;
-}
-.nav a:hover { color: var(--fg); }
-.nav a[aria-current="page"] {
-  color: var(--fg);
-  box-shadow: inset 0 -2px 0 var(--accent);
+  gap: 0.5rem;
 }
 
 .theme-toggle {
@@ -173,6 +162,9 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 
 main { padding-block: 2.6rem 3rem; }
 
+/* The CV block is a plain div holding several sections, so spacing has to key
+   off the direct children of main as well as off adjacent sections. */
+main > * + * { margin-top: 2.8rem; }
 section + section { margin-top: 2.8rem; }
 
 .section-title {
@@ -193,8 +185,6 @@ section + section { margin-top: 2.8rem; }
 }
 
 .page-lede { color: var(--fg-muted); margin: 0 0 2rem; }
-
-.more { margin-top: 1rem; font-size: 0.9rem; }
 
 /* --- hero --------------------------------------------------------------- */
 
@@ -551,7 +541,6 @@ a:hover > .ico { opacity: 1; }
   .pub-thumb { display: none; }
   .hero-photo { width: 110px; }
   .hero-name { font-size: 1.7rem; }
-  .nav { gap: 0.8rem; }
 
   /* A date range and a job title will not both fit across a phone, so the
      two columns become two stacked lines. */

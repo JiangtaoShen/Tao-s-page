@@ -1,7 +1,8 @@
 # Project notes for Claude
 
-Academic homepage for Jiangtao Shen, bilingual in English and Chinese. Deploys
-to `https://github.com/JiangtaoShen/Tao-s-page` and is served by GitHub Pages.
+Academic homepage for Jiangtao Shen: one page, bilingual in English and
+Chinese. Deploys to `https://github.com/JiangtaoShen/Tao-s-page` and is served
+by GitHub Pages.
 
 ## Hard constraints
 
@@ -10,6 +11,9 @@ to `https://github.com/JiangtaoShen/Tao-s-page` and is served by GitHub Pages.
   frameworks or a static site generator without being asked.
 - **Content goes in `data/*.js`, never inline in HTML.** The four data files are
   the only place a human edits to publish something new.
+- **One page only.** Everything lives in `index.html` and there is no navigation
+  bar. Do not split content back out into separate pages. The exception is
+  `projects/<id>.html`, an optional detail page for a single project.
 - **Every user-facing string must exist in both languages.** Content strings use
   `{ en, zh }` in the data files. Interface strings get a key in
   `assets/js/i18n.js` under both `en` and `zh`, referenced from markup with
@@ -23,9 +27,13 @@ to `https://github.com/JiangtaoShen/Tao-s-page` and is served by GitHub Pages.
   is supplied for a bio, award or project description, leave the other absent;
   the renderer falls back to the language that exists.
 
-Publication topic tags are the one exception to the bilingual rule. A tag is
-both the chip label and the filter key, so a translated tag would break the
-filter when the reader switches language. Keep `topic` values in one language.
+Publications are filtered by topic and by nothing else: no type chips, no
+search box. The topics are fixed to the three research directions and are
+declared once in `window.TOPICS` in `data/publications.js`, each with a stable
+`id` and a bilingual `label`. A publication stores ids, never labels, so the
+chip text can change with the language while the filter keeps working. A chip
+is rendered for every declared topic even when nothing is tagged with it, so
+the three directions always read as a complete set.
 
 Contact link icons are inline SVG in the `ICONS` map in `site.js`, drawn in
 `currentColor` so they follow the link colour in both themes. Brand marks are
@@ -40,8 +48,9 @@ titles. No gradients, no drop shadows, no animation beyond a link underline.
 
 ## Rendering model
 
-`assets/js/site.js` renders every page. A page opts into a block by including an
-element with a known id, and the script skips anything absent:
+`assets/js/site.js` renders the page. A block appears only if an element with
+its id is present, so the script also serves the project detail pages, which
+mount just the header and footer:
 
 | id             | renders                                            |
 |----------------|----------------------------------------------------|
@@ -51,9 +60,9 @@ element with a known id, and the script skips anything absent:
 | `news`         | news list, capped by `SITE.newsLimit`              |
 | `contact`      | email and postal address, as CV-style rows          |
 | `pub-toolbar`  | type and topic filter chips plus search box        |
-| `pub-list`     | publications; `data-selected="true"` limits to the homepage subset |
-| `project-list` | project cards; `data-featured="true"` for homepage |
-| `cv`           | CV sections                                        |
+| `pub-list`     | publications, grouped by year; `data-selected="true"` would narrow it to the flagged subset |
+| `project-list` | project cards; `data-featured="true"` would narrow it likewise |
+| `cv`           | CV sections, each rendering its own heading         |
 | `site-footer`  | copyright and last-updated line                    |
 
 Static markup is translated through `data-i18n` (textContent), `data-i18n-html`
@@ -72,7 +81,12 @@ language switch.
 Pages in a subdirectory set `window.BASE = "../"` before the script tag. The
 `url()` helper prefixes local paths with it and leaves absolute URLs alone.
 
+The CV block is a bare div wrapping several sections, so vertical rhythm keys
+off `main > * + *` as well as `section + section`. Dropping either rule leaves
+the CV touching its neighbours.
+
 ## Status
 
-Scaffold complete as of 2026-09-14, filled with `TODO:` placeholders in both
-languages. Real content pending from the user.
+Profile, links, publications, education and service are real, imported from the
+user and from ORCID. Still `TODO:`: the bio paragraphs, the PhD advisor and
+thesis title, two publication author lists, the news items, and the avatar.
