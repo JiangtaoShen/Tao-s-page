@@ -11,8 +11,10 @@
                { en: "Jiangtao Shen", zh: "申江涛" }.
      venue     journal or conference name, no year
      year      number, required, used for grouping
-     type      "journal" | "conference" | "preprint" | "thesis" | "patent"
-               The filter chip label comes from assets/js/i18n.js.
+     type      what this publication is. "book", "chapter" or "monograph"
+               count as a book; "journal", "conference" or "preprint" count
+               as a paper, and the first two are separable in the filter.
+               For a book, put the publisher in `venue`.
      note      short badge, e.g. { en: "Oral", zh: "口头报告" }
      topic     array of topic ids from window.TOPICS below, drives the filter
      thumb     optional teaser image, 4:3 works best

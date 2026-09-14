@@ -30,6 +30,12 @@ window.I18N = {
 
     "filter.allTopics":     "All topics",
     "filter.allRoles":      "Any role",
+    "filter.allKinds":      "All kinds",
+    "filter.allSubtypes":   "All papers",
+    "kind.book":            "Books",
+    "kind.paper":           "Papers",
+    "kind.journal":         "Journal",
+    "kind.conference":      "Conference",
     "filter.lead":          "First or corresponding author",
 
     "empty.pubs":           "No matching publications.",
@@ -64,6 +70,12 @@ window.I18N = {
 
     "filter.allTopics":     "全部主题",
     "filter.allRoles":      "不限身份",
+    "filter.allKinds":      "全部类型",
+    "filter.allSubtypes":   "全部论文",
+    "kind.book":            "专著",
+    "kind.paper":           "论文",
+    "kind.journal":         "期刊论文",
+    "kind.conference":      "会议论文",
     "filter.lead":          "第一作者或通讯作者",
 
     "empty.pubs":           "没有符合条件的论文。",

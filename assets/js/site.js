@@ -468,9 +468,32 @@
       .map(function (y) { return { year: y, items: years[y] }; });
   }
 
+  // What a publication is, as opposed to what it is about. The structure lives
+  // here because it is interface vocabulary, not the user's content; the words
+  // come from assets/js/i18n.js. `types` lists the values a publication's
+  // `type` field may hold to count as this kind.
+  var KINDS = [
+    { id: "book", key: "kind.book", types: ["book", "chapter", "monograph"] },
+    {
+      id: "paper",
+      key: "kind.paper",
+      types: ["journal", "conference", "preprint"],
+      subtypes: [
+        { id: "journal", key: "kind.journal" },
+        { id: "conference", key: "kind.conference" }
+      ]
+    }
+  ];
+
+  function kindById(id) {
+    var found = null;
+    KINDS.forEach(function (k) { if (k.id === id) found = k; });
+    return found;
+  }
+
   // Filter state is kept outside the render so switching language does not
-  // reset the chip the reader has chosen.
-  var pubState = { topic: "all", role: "all" };
+  // reset the chips the reader has chosen.
+  var pubState = { topic: "all", role: "all", kind: "all", subtype: "all" };
 
   function renderPublications() {
     var el = mount("pub-list");
@@ -487,6 +510,12 @@
         if (pubState.topic !== "all"
             && list(p.topic).map(String).indexOf(pubState.topic) === -1) return false;
         if (pubState.role === "lead" && !isLeadAuthor(p)) return false;
+
+        if (pubState.kind !== "all") {
+          var kind = kindById(pubState.kind);
+          if (!kind || kind.types.indexOf(String(p.type)) === -1) return false;
+          if (pubState.subtype !== "all" && String(p.type) !== pubState.subtype) return false;
+        }
         return true;
       });
 
@@ -509,8 +538,10 @@
   // Only topics filter the list. The chips follow the order declared in
   // window.TOPICS; a topic with no publications is still shown, so the three
   // research directions always read as a complete set.
-  // Two rows of chips: topic, then the reader's own position in the author
-  // list. Both narrow the same list, so they combine.
+  // Rows of chips: topic, author position, publication kind, and the kind's
+  // subtypes. They all narrow the same list, so they combine. The subtype row
+  // is always in the DOM and merely hidden, so choosing a kind never rebuilds
+  // the toolbar and never takes focus off the chip just clicked.
   function buildToolbar(bar, pool, draw) {
     var known = TOPICS.map(function (x) { return String(x.id); });
 
@@ -533,9 +564,14 @@
         + '" aria-pressed="' + (pubState[key] === value) + '">' + esc(text) + "</button>";
     }
 
-    function row(key, chips) {
-      return '<div class="filters" data-key="' + key + '">' + chips.join("") + "</div>";
+    function row(key, chips, hidden) {
+      return '<div class="filters" data-key="' + key + '"' + (hidden ? " hidden" : "")
+        + ">" + chips.join("") + "</div>";
     }
+
+    // Only one kind declares subtypes today, and the row belongs to it.
+    var nested = null;
+    KINDS.forEach(function (k) { if (k.subtypes && !nested) nested = k; });
 
     bar.className = "toolbar";
     bar.innerHTML =
@@ -545,7 +581,31 @@
       + row("role", [
           chip("role", "all", tr("filter.allRoles")),
           chip("role", "lead", tr("filter.lead"))
-        ]);
+        ])
+      + row("kind", [chip("kind", "all", tr("filter.allKinds"))].concat(
+          KINDS.map(function (k) { return chip("kind", k.id, tr(k.key)); })
+        ))
+      + (nested
+          ? row("subtype",
+              [chip("subtype", "all", tr("filter.allSubtypes"))].concat(
+                nested.subtypes.map(function (x) { return chip("subtype", x.id, tr(x.key)); })
+              ),
+              pubState.kind !== nested.id)
+          : "");
+
+    var subtypeRow = bar.querySelector('.filters[data-key="subtype"]');
+
+    function syncSubtypeRow() {
+      if (!subtypeRow || !nested) return;
+      var show = pubState.kind === nested.id;
+      subtypeRow.hidden = !show;
+      if (!show && pubState.subtype !== "all") {
+        pubState.subtype = "all";
+        subtypeRow.querySelectorAll(".chip").forEach(function (c) {
+          c.setAttribute("aria-pressed", String(c.dataset.value === "all"));
+        });
+      }
+    }
 
     bar.querySelectorAll(".filters").forEach(function (group) {
       group.addEventListener("click", function (e) {
@@ -555,9 +615,12 @@
           c.setAttribute("aria-pressed", String(c === btn));
         });
         pubState[group.dataset.key] = btn.dataset.value;
+        if (group.dataset.key === "kind") syncSubtypeRow();
         draw();
       });
     });
+
+    syncSubtypeRow();
   }
 
   /* --- projects --------------------------------------------------------- */

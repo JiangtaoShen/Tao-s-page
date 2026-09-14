@@ -67,6 +67,10 @@ Chinese if their browser prefers it, English otherwise.
 
 **A publication.** Append an entry to `window.PUBLICATIONS` in
 `data/publications.js`. Entries are grouped and sorted by year automatically.
+Set `type` to say what it is: `book`, `chapter` or `monograph` file under
+books, and `journal`, `conference` or `preprint` under papers, with journal and
+conference separable in the filter. For a book, `venue` holds the publisher.
+
 Set `corresponding: true` if you were a corresponding author; first authorship
 is read off the author list, so it needs no field of its own. The two together
 drive the author-position filter.
