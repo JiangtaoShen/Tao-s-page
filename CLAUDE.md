@@ -87,9 +87,8 @@ drops the separator and silently corrupts the glyph.
 ## Visual direction
 
 Minimal academic: a warm cream ground in light mode, a single restrained blue
-accent, hairline rules,
-generous whitespace, a measure of 880px. No gradients, no drop shadows, no
-animation beyond a link underline.
+accent, hairline rules, generous whitespace, a measure of 880px. No gradients,
+no drop shadows, no animation beyond a link underline.
 
 **Three sizes, and no others.** `--fs-lg` is the name, `--fs-base` is anything
 a reader actually reads, `--fs-sm` is metadata and chrome: dates, section
@@ -125,8 +124,9 @@ mount just the header and footer:
 | `interests`    | research interest bullets                          |
 | `news`         | news list, capped by `SITE.newsLimit`              |
 | `contact`      | email and postal address, as CV-style rows          |
-| `pub-toolbar`  | type and topic filter chips plus search box        |
-| `pub-list`     | publications, grouped by year; `data-selected="true"` would narrow it to the flagged subset |
+| `pub-toolbar`  | filter chips: topic, author position, paper type    |
+| `pub-list`     | papers, grouped by year, capped by `PUB_LIMIT`      |
+| `book-list`    | books, newest first, no filters                     |
 | `project-list` | project cards; `data-featured="true"` would narrow it likewise |
 | `cv-top`       | CV sections flagged `top: true`, rendered near the head of the page |
 | `cv`           | the remaining CV sections, each with its own heading |
