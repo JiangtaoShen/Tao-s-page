@@ -56,8 +56,8 @@ window.CV = [
           zh: "西北工业大学 航海学院"
         },
         detail: {
-          en: "Advisor: TODO. Thesis: TODO.",
-          zh: "导师：TODO。学位论文：TODO。"
+          en: "Advisor: Prof. Peng Wang. Thesis: TODO.",
+          zh: "导师：王鹏 教授。学位论文：TODO。"
         }
       },
       {
@@ -67,7 +67,10 @@ window.CV = [
           en: "School of Marine Science and Technology, Northwestern Polytechnical University, Xi'an, China",
           zh: "西北工业大学 航海学院"
         },
-        detail: ""
+        detail: {
+          en: "Advisor: Prof. Baowei Song, Member of the Chinese Academy of Engineering.",
+          zh: "导师：宋保维 教授，中国工程院院士。"
+        }
       },
       {
         when: "2014.09 - 2018.06",

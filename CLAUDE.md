@@ -186,6 +186,7 @@ them touching their neighbours.
 
 ## Status
 
-Profile, links, publications, education and service are real, imported from the
-user and from ORCID. Still `TODO:`: the bio paragraphs, the PhD advisor and
-thesis title, two publication author lists, the news items, and the avatar.
+Profile, links, publications, education, advisors and service are real,
+supplied by the user or imported from ORCID. Still `TODO:`: the bio
+paragraphs, the PhD thesis title, a line on each postdoc post, two publication
+author lists, the news items, and the avatar.
