@@ -56,8 +56,8 @@ window.CV = [
           zh: "西北工业大学 航海学院"
         },
         detail: {
-          en: "Advisor: Prof. Peng Wang. Thesis: TODO.",
-          zh: "导师：王鹏 教授。学位论文：TODO。"
+          en: "Advisor: Prof. Peng Wang, National High-Level Talent. Thesis: TODO.",
+          zh: "导师：王鹏 教授，国家级高层次人才。学位论文：TODO。"
         }
       },
       {
